@@ -13,24 +13,22 @@
 
     <link href="/static/settings.css" rel="stylesheet">
     <!--./PROFILE STYLES-->
-    <!--COMMON STYLES-->
-    <link href="/static/common.css" rel="stylesheet">
+
 
 </head>
 
 <body id="main-body">
-<section class="container-fluid">
     <div class="container">
         <div class="row">
             <!--PROFILE10-->
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 bg9">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg9">
                 <div class="main_style_10">
                     <div class="row brdr_btm">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" align="center">
                             <div class="round9"></div>
                             <h4 class="hd7" th:text="${patient.FirstName}"></h4>
                             <p class="p8" th:text = "${patient.LastName}"></p>
-                            <p class="p8 pb-3" th:text = "${patient.Address}"></p>
+                            <p class="p8 pb-3" th:text = "${patient.Disease}"></p>
                         </div>
                     </div>
                     <div class="row pt-1 brdr_btm" id="contact">
@@ -40,7 +38,7 @@
                                     <i class="fa fa-envelope-o"></i>
                                 </div>
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 pl-0">
-                                    <p>beth.anglin@acme.com</p>
+                                    <p th:text = "${patient.Mail}">beth.anglin@acme.com</p>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +50,7 @@
                                     <i class="fa fa-phone"></i>
                                 </div>
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 pl-0">
-                                    <p>321-123-4567</p>
+                                    <p th:text = "${patient.PhoneNumber}"></p>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +62,7 @@
                                     <i class="fa fa-mobile"></i>
                                 </div>
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 pl-0">
-                                    <p>321-987-6543</p>
+                                    <p >321-987-6543</p>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +86,7 @@
                                     <i class="fa fa-globe"></i>
                                 </div>
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 pl-0">
-                                    <p>San Deigo,CA, US</p>
+                                    <p th:text = "${patient.Address}">San Deigo,CA, US</p>
                                 </div>
                             </div>
                         </div>
@@ -102,6 +100,5 @@
             </div>
         </div>
     </div>
-</section>
 </body>
 </html>
