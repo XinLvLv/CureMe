@@ -23,6 +23,6 @@ public class PatientsController {
                                      String City, String Mail, String Disease)
     {
         patientsService.add(FirstName, LastName, Address, PhoneNumber, City, Mail, Disease);
-        return "redirect:/"
+        return "redirect:/";
     }
 }
