@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Service
@@ -13,7 +14,7 @@ public class PatientsService {
     @Autowired
     private PatientsRepository patientsRepository;
 
-    public boolean add ( String FirstName, String LastName, String Address, String PhoneNumber,
+    public Patients add ( String FirstName, String LastName, String Address, String PhoneNumber,
     String City, String Mail, String Disease){
         Patients patient = new Patients();
         patient.setFirstName(FirstName);
@@ -25,6 +26,7 @@ public class PatientsService {
         patient.setDisease(Disease);
         patient.setPassword();
         patientsRepository.save(patient);
-        return true;
+        return patient;
     }
+
 }
