@@ -1,4 +1,6 @@
 package com.example.cureme.Entity;
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,8 @@ public class Patients {
     private String Mail;
     @Column(name = "Disease")
     private String Disease;
+    @Column(name = "Password")
+    private String Password;
 
     public Integer getId() {
         return id;
@@ -86,4 +90,25 @@ public class Patients {
     public void setDisease(String disease) {
         Disease = disease;
     }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(){
+        String password = "";
+        for (int i = 1; i<9; i++){
+            double random = Math.random();
+            double random_tri =random*3;
+            if (random_tri >= 0 && random_tri < 1) {
+                password += (char) (random * ('9' - '0') + '0');
+            } else if (random_tri >= 1 && random_tri < 2) {
+                password += (char) (random * ('Z' - 'A') + 'A');
+            } else {
+                password += (char) (random * ('z' - 'a') + 'a');
+            }
+        }
+        Password = password;
+    }
+
 }

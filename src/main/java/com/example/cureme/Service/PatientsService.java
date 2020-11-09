@@ -23,6 +23,7 @@ public class PatientsService {
         patient.setCity(City);
         patient.setMail(Mail);
         patient.setDisease(Disease);
+        patient.setPassword();
         patientsRepository.save(patient);
         return true;
     }
