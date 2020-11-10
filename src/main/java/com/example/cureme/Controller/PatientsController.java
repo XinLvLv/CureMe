@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @Controller
 public class PatientsController {
@@ -20,9 +24,10 @@ public class PatientsController {
 
     @PostMapping("/addPatients")
     public String add(@RequestParam String FirstName, String LastName, String Address, String PhoneNumber,
-                                     String City, String Mail, String Disease,Model model)
-    {
-        Patients patient = patientsService.add(FirstName, LastName, Address, PhoneNumber, City, Mail, Disease);
+                      String Mail, String Disease, String DOB, String Gender, Integer Age, Model model) throws ParseException {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Patients patient = patientsService.add(FirstName, LastName, Address, PhoneNumber, Mail, Disease,Age,
+                sdf.parse(DOB), Gender);
         model.addAttribute("patient", patient);
         return "patientInfo";
     }

@@ -1,7 +1,7 @@
 package com.example.cureme.Entity;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Patients")
@@ -18,14 +18,18 @@ public class Patients {
     private String Address;
     @Column(name = "phone_number")
     private String PhoneNumber;
-    @Column(name = "City")
-    private String City;
     @Column(name = "Mail")
     private String Mail;
     @Column(name = "Disease")
     private String Disease;
     @Column(name = "Password")
     private String Password;
+    @Column(name = "Gender")
+    private String Gender;
+    @Column(name = "DOB")
+    private Date DOB;
+    @Column(name = "Age")
+    private Integer age;
 
     public Integer getId() {
         return id;
@@ -67,14 +71,6 @@ public class Patients {
         PhoneNumber = phoneNumber;
     }
 
-    public String getCity() {
-        return City;
-    }
-
-    public void setCity(String city) {
-        City = city;
-    }
-
     public String getMail() {
         return Mail;
     }
@@ -111,4 +107,27 @@ public class Patients {
         Password = password;
     }
 
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String gender) {
+        Gender = gender;
+    }
+
+    public Date getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(Date dob) {
+        DOB = dob;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }
