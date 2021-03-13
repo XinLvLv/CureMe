@@ -1,0 +1,57 @@
+body{
+  background: RGB(56,65,80);
+}
+
+.logo-image{
+    margin: 30px 0px;
+}
+
+/*style of login form*/
+.login-form-main{
+    background: RGB(255,255,255);
+    padding: 20px;
+}
+
+.input-label {
+   color: RGB(130,144,163);
+}
+
+.login-form-bottom{
+    background: RGB(108,122,141);
+    height: 30px;
+}
+
+.title{
+    color: RGB(50,197,210);
+    font-size: 25px;
+    text-align: center;
+   /*clear the margin of the browser agent*/
+   -webkit-margin-before: 0em;
+   -webkit-margin-after: 0em;
+}
+.copyright{
+    color: RGB(108,122,141);
+    text-align: center;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+input[type="text"]{
+    background: RGB(221,227,236);
+    border: transparent;
+    padding: 5px;
+    width: 100%;
+}
+
+.form-link{
+  color: RGB(130,144,163);
+  font-size: 15px;
+  /*clear the margin of the browser agent*/
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  margin-top: 20px;
+}
+
+
+
+

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CareMe - Account</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="shortcut icon" href="/static/image/icon.png" type="image/x-icon">
+</head>
+<body>
+<div class="header">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="logo">
+                <img src="/static/image/logo.png" class="logo-image">
+            </div>
+
+        </div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <span class="fa fa-bars"></span>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <span class="fa fa-search"></span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <p>Doctor</p>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <a href="/account">
+                <div class="doctor-avatar">
+                    <img src="/static/image/avatar.jpg" class="doctor-avatar-image">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <nav>
+            <div class="nav-list">
+                <a href="/home">
+                    <div class="nav-item on-focus">
+                        <span class="fa fa-home nav-item-icon on-focus"></span>
+                        <span>Home</span>
+                    </div>
+                </a>
+                <div class="nav-title">
+                    <span>FEATURES</span>
+                </div>
+                <a href="/add-patient">
+                    <div class="nav-item">
+                        <span class="fa fa-user-o nav-item-icon"></span>
+                        <span>Add Patient</span>
+                    </div>
+                </a>
+                <a href="/patient-list">
+                    <div class="nav-item">
+                        <span class="fa fa-list nav-item-icon"></span>
+                        <span>Patient List</span>
+                    </div>
+                </a>
+                <a href="/schedule">
+                    <div class="nav-item">
+                        <span class="fa fa-calendar nav-item-icon"></span>
+                        <span>Schedule</span>
+                    </div>
+                </a>
+                <a href="/reading">
+                    <div class="nav-item">
+                        <span class="fa fa-line-chart nav-item-icon"></span>
+                        <span>Readings</span>
+                    </div>
+                </a>
+                <a href="/add-notice">
+                    <div class="nav-item">
+                        <span class="fa fa-map-pin nav-item-icon"></span>
+                        <span>Patient Notice</span>
+                    </div>
+                </a>
+                <div class="nav-title">
+                    <span>GENERAL</span>
+                </div>
+                <a href="/notice-board">
+                    <div class="nav-item">
+                        <span class="fa fa-pencil-square-o nav-item-icon"></span>
+                        <span>Notice Board</span>
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="nav-item">
+                        <span class="fa fa-sign-out nav-item-icon"></span>
+                        <span>Logout</span>
+                    </div>
+                </a>
+            </div>
+        </nav>
+    </div>
+    <div class="col-md-9">
+        <div class="main-content">
+            <div class="account-header">
+                <div class="row">
+                    <div class="col-md-2">
+                        <p class="account-header-item account-header-item-focus">Overview</p>
+                        <div class="account-focus account-focus-on"></div>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="account-header-item">Account</p>
+                        <div class="account-focus"></div>
+                    </div>
+                    <div class="col-md-8"></div>
+                </div>
+            </div>
+            <div id="account" class="account-content-main tab-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="account-nav">
+                            <div class="account-nav-item account-nav-item-focus">
+                                <span class="fa fa-pencil account-nav-item-icon"></span>
+                                <span>Personal Info</span>
+                            </div>
+                            <div class="account-nav-item">
+                                <span class="fa fa-image account-nav-item-icon"></span>
+                                <span>Change Avatar</span>
+                            </div>
+                            <div class="account-nav-item">
+                                <span class="fa fa-lock account-nav-item-icon"></span>
+                                <span>Change Password</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="account-content-personal-info">
+                            <div class="account-content-personal-info-form">
+                                <form>
+                                    <div class="form-input-box">
+                                        <p class="input-label">Name*</p>
+                                        <input type="text" placeholder="Username">
+                                    </div>
+                                    <div class="form-input-box">
+                                        <p class="input-label">Email*</p>
+                                        <input type="text" placeholder="Email">
+                                    </div>
+                                    <div class="form-input-box">
+                                        <p class="input-label">Mobile Number*</p>
+                                        <input type="text" placeholder="Mobile Number">
+                                    </div>
+                                    <div class="form-input-box">
+                                        <p class="input-label">Specilization*</p>
+                                        <input type="text" placeholder="specilization">
+                                    </div>
+                                    <div class="form-input-box">
+                                        <p class="input-label">Experience*</p>
+                                        <input type="text" placeholder="Experience">
+                                    </div>
+                                    <div class="form-input-box">
+                                        <p class="input-label">Age*</p>
+                                        <input type="text" placeholder="Age">
+                                    </div>
+                                    <input type="button" value="Submit">
+                                    <input class="form-associate-button" type="button" value="Reset">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="overview" class="account-overview tab-item show">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="doctor-overview-avatar">
+                            <img src="/static/image/avatar.jpg" class="doctor-overview-avatar-image">
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="doctor-details">
+                            <div class="doctor-details-name">
+                                <span>DR.AHL</span>
+                            </div>
+                            <div class="doctor-details-degree">
+                                <span> Bachelor of Medicine, Bachelor of Surgery, or in Latin</span>
+                            </div>
+                            <div class="doctor-details-email">
+                                <a href="mailto:ahil@gmail.com">
+                                    <span class="fa fa-envelope-o"></span>
+                                    <span>ahil@gmail.com</span>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="doctor-details-phone">
+                                        <span class="fa fa-phone"></span>
+                                        <span>0346560163</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="doctor-details-exp">
+                                        <span class="fa fa-flag-o"></span>
+                                        <span>6 years of experience</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doctor-details-tab">
+                            <div class="account-header">
+                            <div class="row">
+                            <div class="col-md-3">
+                                <p class="account-header-item account-header-item-focus">Doctor's Patients</p>
+                                <div class="account-focus account-focus-on"></div>
+                            </div>
+                            <div class="col-md-8"></div>
+                        </div>
+                        </div>
+                            <div class="doctor-patients">
+                            <table id="patient-list">
+                                <tr>
+                                    <th>
+                                        <span class="fa fa-address-book"></span>
+                                        <span>Name</span>
+                                    </th>
+                                    <th>
+                                        <span class="fa fa-envelope-square"></span>
+                                        <span>Email</span>
+                                    </th>
+                                    <th>
+                                        <span class="fa fa-pencil-square"></span>
+                                        <span>Registration ID</span>
+                                    </th>
+                                    <th>
+                                        <span class="fa fa-share-alt-square"></span>
+                                        <span>View</span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag">Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag">Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag">Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag not-active-tag">Not Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag not-active-tag">Not Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag not-active-tag">Not Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag not-active-tag">Not Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bilal Asif</td>
+                                    <td>bilal@email.com</td>
+                                    <td>
+                                        <span>
+                                            BIL852357
+                                        </span>
+                                        <span>
+                                            <div class="active-tag not-active-tag">Not Active</div>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="Readings.html">
+                                            <button class="view-button">
+                                                <span>View</span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<!--   <script type="text/javascript">-->
+<!--       $(".account-header-item").click(function(){-->
+<!--           // 修改tab标签样式-->
+<!--           $(this).attr("class","account-header-item account-header-item-focus")-->
+<!--           $(this).siblings().attr("class","account-focus account-focus-on")-->
+
+<!--           // 获取tab ID-->
+<!--           var itemId = $(this).attr("tabid")-1;-->
+
+<!--           // 切换到指定tab-->
+<!--           $("#box").find("div:eq("+itemId+")").attr("class","show")-->
+<!--           $("#box").find("div:eq("+itemId+")").siblings().attr("class","tab-item")-->
+<!--       })-->
+<!--   </script>-->
+</body>
+</html>

@@ -14,24 +14,15 @@ import java.util.Date;
 
 
 @Controller
+@RequestMapping
 public class PatientsController {
     @Autowired
     private PatientsService patientsService;
 
-    @RequestMapping("/")
-    public String addPatient(){
-        return "addPatients";
-    }
+    @GetMapping(path = "/add-patient")
+    private String AddPatient(){return "AddPatient";}
 
-    @PostMapping("/addPatients")
-    public String add(@RequestParam String FirstName, String LastName, String Address, String PhoneNumber,
-                      String Mail, String Disease, String DOB, String Gender, Integer Age, Model model) throws ParseException {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        Patients patient = patientsService.add(FirstName, LastName, Address, PhoneNumber, Mail, Disease,Age,
-                sdf.parse(DOB), Gender);
-        model.addAttribute("patient", patient);
-        int resultCode = SendMessageUtil.send("xlll","d41d8cd98f00b204e980",PhoneNumber,"Welcome to CareMe. Here we help to secure your health. username:"+patient.getFirstName()+"; password:"+patient.getPassword());
-        System.out.println(SendMessageUtil.getMessage(resultCode));
-        return "patientInfo";
-    }
+    @GetMapping(path = "/patient-list")
+    private String PatientList(){return "PatientList";}
+
 }
