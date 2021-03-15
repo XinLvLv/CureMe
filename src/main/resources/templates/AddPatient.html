@@ -111,89 +111,103 @@
                     ADD PATIENT
                 </span>
             </div>
-            <div class="main-content-form">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-input-box">
-                            <p class="input-label">
-                                First Name*
-                            </p>
-                            <input type="text" placeholder="Title">
+            <form action="/add-patient-submit-form" method = "post">
+                <div class="main-content-form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    First Name*
+                                </p>
+                                <input type="text" placeholder="First Name" name="firstName" maxlength="20"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Last Name*
+                                </p>
+                                <input type="text" placeholder="Last Name" name="lastName" maxlength="20"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Date of Birth*
+                                </p>
+                                <input type="datetime" name="dateOfBirth" placeholder="YYYY/MM/DD"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-input-box">
-                            <p class="input-label">
-                                Last Name*
-                            </p>
-                            <input type="text" placeholder="Title">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <input type="radio" name="gender" value="Female"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                                Female
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <input type="radio" name="gender" value="Male"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                                Male
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-input-box">
-                            <p class="input-label">
-                                Date of Birth*
-                            </p>
-                            <input type="date" name="DOB">
+                    <div class="form-input-box">
+                        <p class="input-label">
+                            Address*
+                        </p>
+                        <textarea rows="3" type="text" placeholder="Address" name="address" maxlength="150"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Phone Number*
+                                </p>
+                                <input type="text" placeholder="Phone Number" name="phoneNumber" maxlength="20"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Email*
+                                </p>
+                                <input type="text" placeholder="Email" name="email" maxlength="50"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <input type="checkbox" name="disease" value="Sepsis">
+                                Sepsis
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <input type="checkbox" name="disease" value="Hypotension">
+                                Hypotension
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <input type="checkbox" name="disease" value="Sleep apnea">
+                                Sleep apnea
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit">
+                    <input class="form-associate-button" type="button" value="Cancel">
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-input-box">
-                            <input type="radio" name="Gender" value="Female">Female
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-input-box">
-                            <input type="radio" name="Gender" value="Male">Male
-                        </div>
-                    </div>
-                </div>
-                <div class="form-input-box">
-                    <p class="input-label">
-                        Address*
-                    </p>
-                    <textarea rows="2"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-input-box">
-                            <p class="input-label">
-                                Phone Number*
-                            </p>
-                            <input type="text" placeholder="Phone Number">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-input-box">
-                            <p class="input-label">
-                                Email*
-                            </p>
-                            <input type="text" placeholder="Email">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-input-box">
-                            <input type="checkbox" name="diagnosis" value="Sepsis">Sepsis
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-input-box">
-                            <input type="checkbox" name="diagnosis" value="Hypotension">Hypotension
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-input-box">
-                            <input type="checkbox" name="diagnosis" value="Sleep apnea">Sleep apnea
-                        </div>
-                    </div>
-                </div>
-                <input type="button" value="Submit">
-                <input class="form-associate-button" type="button" value="Cancel">
-            </div>
+            </form>
         </div>
     </div>
 </div>

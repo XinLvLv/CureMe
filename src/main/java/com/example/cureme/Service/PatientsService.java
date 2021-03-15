@@ -1,6 +1,6 @@
 package com.example.cureme.Service;
 
-import com.example.cureme.Entity.Patients;
+import com.example.cureme.Entity.Patient;
 import com.example.cureme.Repository.PatientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
@@ -16,21 +16,24 @@ public class PatientsService {
     @Autowired
     private PatientsRepository patientsRepository;
 
-    public Patients add (String FirstName, String LastName, String Address, String PhoneNumber,
-                         String Mail, String Disease, Integer Age, Date DOB, String Gender){
-        Patients patient = new Patients();
-        patient.setFirstName(FirstName);
-        patient.setLastName(LastName);
-        patient.setAddress(Address);
-        patient.setPhoneNumber(PhoneNumber);
-        patient.setMail(Mail);
-        patient.setDisease(Disease);
+    public Patient add ( Date dateOfBirth, String firstName, String lastName, String gender, String address,
+                         String phoneNumber, String email, String disease){
+        Patient patient = new Patient();
+        patient.setDateOfBirth(dateOfBirth);
+        patient.setFirstName(firstName);
+        patient.setLastName(lastName);
+        patient.setGender(gender);
+        patient.setAddress(address);
+        patient.setPhoneNumber(phoneNumber);
+        patient.setEmail(email);
+        patient.setDisease(disease);
         patient.setPassword();
-        patient.setAge(Age);
-        patient.setDOB(DOB);
-        patient.setGender(Gender);
+        patient.setStatus("Pending");
+        patient.setSchedule(3);
         patientsRepository.save(patient);
         return patient;
     }
+
+    public List<Patient> patientList(){return patientsRepository.listAll();}
 
 }

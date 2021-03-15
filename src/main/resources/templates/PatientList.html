@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Patient List</title>
@@ -118,7 +118,7 @@
                 </a>
             </div>
             <div class="main-content-list">
-                <table class="patient-list">
+                <table class="patient-list" >
                     <tr>
                        <th>Registration No.</th>
                        <th>Full Name</th>
@@ -127,174 +127,21 @@
                        <th>Email</th>
                        <th>View  Profile</th>
                     </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
+                    <tr th:each="patient:${patients}">
+                        <td th:text = "${patient.patientId}"></td>
+                        <td th:text = "${patient.firstName + ' ' + patient.lastName}"></td>
                         <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
+                        <td th:text = "${patient.phoneNumber}"></td>
+                        <td th:text = "${patient.email}"></td>
                         <td>
-                            <a href="Readings.html">
+                            <a th:href="@{'/reading/'+${patient.patientId}}">
                                 <button class="view-button">
                                 <span>View</span>
                             </button>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ADUb2135</td>
-                        <td>Bilal Asif</td>
-                        <td>19</td>
-                        <td>1435987906</td>
-                        <td>bilal@email.com</td>
-                        <td>
-                            <a href="Readings.html">
-                                <button class="view-button">
-                                <span>View</span>
-                            </button>
-                            </a>
-                        </td>
-                    </tr>
+
                 </table>
             </div>
         </div>
