@@ -36,4 +36,7 @@ public class PatientsService {
 
     public List<Patient> patientList(){return patientsRepository.listAll();}
 
+    public List<Patient> selectPatient(Integer patientId) {
+        return patientsRepository.selectPatients(patientId);
+    }
 }

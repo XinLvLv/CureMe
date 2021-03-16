@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Schedule</title>
@@ -67,7 +67,7 @@
                         <span>Patient List</span>
                     </div>
                 </a>
-                <a href="/schedule">
+                <a href="/schedule/">
                     <div class="nav-item on-focus">
                         <span class="fa fa-calendar nav-item-icon on-focus"></span>
                         <span>Schedule</span>
@@ -106,14 +106,8 @@
     <div class="col-md-9">
         <div class="main-content select-box">
             <form>
-                <select>
-                    <option>Bilal Asif</option>
-                    <option>Bilal Asif</option>
-                    <option>Bilal Asif</option>
-                    <option>Bilal Asif</option>
-                    <option>Bilal Asif</option>
-                    <option>Bilal Asif</option>
-                    <option>Bilal Asif</option>
+                <select onchange="location.href = this.options[this.selectedIndex].value">
+                    <option th:each="patient:${patients}" th:text = "${patient.firstName + ' ' + patient.lastName}" th:value="${+patient.patientId}"></option>
                 </select>
             </form>
         </div>
@@ -122,7 +116,7 @@
                 <span class="fa fa-star"></span>
                 <span>BIO</span>
             </div>
-            <div class="row">
+            <div class="row" th:each = "selectedPatient:${selectedPatients}">
                 <div class="col-md-4">
                     <div class="BIO-content">
                         <div class="BIO-content-text BIO-content-text-1">
@@ -130,7 +124,7 @@
                                 <span>REGISTRATION</span>
                             </div>
                             <div class="BIO-content-description">
-                                <span>BIL852357</span>
+                                <span th:text = ${selectedPatient.patientId}>BIL852357</span>
                             </div>
                         </div>
                     </div>
@@ -142,7 +136,7 @@
                                 <span>NAME</span>
                             </div>
                             <div class="BIO-content-description">
-                                <span>Bilal Asif</span>
+                                <span th:text = "${selectedPatient.firstName + ' ' + selectedPatient.lastName}">Bilal Asif</span>
                             </div>
                         </div>
                     </div>
@@ -154,13 +148,14 @@
                             <span>CURRENTLY</span>
                             </div>
                             <div class="BIO-content-description">
-                                <span>20 readings/Day</span>
+                                <span th:text = "${selectedPatient.schedule}">20 readings/Day</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="main-content main-content-associate">
             <div class="main-content-title">
                 <span CLASS="fa fa-calendar-minus-o"></span>
