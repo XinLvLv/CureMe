@@ -443,3 +443,12 @@ table tr:nth-child(odd){
 .not-active-tag{
     background: RGB(240,173,78);
 }
+
+/*empty box*/
+.main-content-empty-box{
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
