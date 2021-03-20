@@ -44,6 +44,10 @@ public class Patient {
     @Column(name = "password")
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "doctor")
+    private Doctor doctor;
+
     //Getters and Setters
     public Integer getPatientId() {
         return patientId;
