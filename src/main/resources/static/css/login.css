@@ -43,6 +43,20 @@ input[type="text"]{
     width: 100%;
 }
 
+textarea{
+    background-color: RGB(221,227,236);
+    border: transparent;
+    padding: 5px;
+    width: 100%;
+}
+
+input[type="datetime"]{
+    background: RGB(221,227,236);
+    border: transparent;
+    padding: 5px;
+    width: 100%;
+}
+
 .form-link{
   color: RGB(130,144,163);
   font-size: 15px;

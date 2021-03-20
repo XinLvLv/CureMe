@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class CureMeController {
     @GetMapping(path="/")
-    private String Login() { return "Login"; }
+    private String login() { return "Login"; }
 
     @GetMapping(path = "/home")
-    private String Home() {return "Home"; }
+    private String home() {return "Home"; }
 }

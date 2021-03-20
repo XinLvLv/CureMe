@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class ReadingController {
     @GetMapping(path = "/reading")
-    private String Reading(){return "Readings";}
+    private String reading(){return "Readings";}
 }

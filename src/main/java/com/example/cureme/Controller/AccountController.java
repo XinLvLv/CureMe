@@ -8,5 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class AccountController {
     @GetMapping(path = "/account")
-    private String Account(){return "Account";}
+    private String account(){return "Account";}
+
+    @GetMapping(path = "/sign-up")
+    private String signUp(){return "SignUp";}
 }
