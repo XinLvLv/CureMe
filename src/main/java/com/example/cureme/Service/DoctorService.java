@@ -3,10 +3,12 @@ package com.example.cureme.Service;
 import com.example.cureme.Entity.Doctor;
 import com.example.cureme.Repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Transactional
 @Service
@@ -29,6 +31,9 @@ public class DoctorService {
         return doctor;
     }
 
+    public List<Doctor> currentDoctor(String email){
+        return doctorRepository.selectDoctorByEmail(email);
+    }
 
 
 }

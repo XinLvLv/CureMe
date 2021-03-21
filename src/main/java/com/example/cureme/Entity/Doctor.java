@@ -35,6 +35,9 @@ public class Doctor {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
+    @Column(name = "password")
+    private String password;
+
     //getters and setters
     public Integer getDoctorId() {
         return doctorId;
@@ -106,5 +109,13 @@ public class Doctor {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
