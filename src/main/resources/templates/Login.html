@@ -26,11 +26,13 @@
                 <form action="/login" method="post">
                     <div class="form-input-box">
                         <p class="input-label">Username*</p>
-                        <input type="text" placeholder="Username" name="userName">
+                        <input type="text" placeholder="Username" name="userName" maxlength="50"
+                               required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
                     </div>
                     <div class="form-input-box">
                         <p class="input-label">Password*</p>
-                        <input type="password" placeholder="Password" name="password">
+                        <input type="password" placeholder="Password" name="password" maxlength="20"
+                               required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
                     </div>
                     <div class="row">
                         <div class="col-md-4">

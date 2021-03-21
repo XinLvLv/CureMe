@@ -43,6 +43,13 @@ input[type="text"]{
     width: 100%;
 }
 
+input[type="password"]{
+    background: RGB(221,227,236);
+    border: transparent;
+    padding: 5px;
+    width: 100%;
+}
+
 textarea{
     background-color: RGB(221,227,236);
     border: transparent;

@@ -17,7 +17,7 @@ public class DoctorService {
     private DoctorRepository doctorRepository;
 
     public Doctor add(String firstName, String lastName, String briefIntroduction, String specialization, String phoneNumber,
-                      String email, Date startOfCareer, Date dateOfBirth){
+                      String email, String password, Date startOfCareer, Date dateOfBirth){
         Doctor doctor = new Doctor();
         doctor.setFirstName(firstName);
         doctor.setLastName(lastName);
@@ -25,6 +25,7 @@ public class DoctorService {
         doctor.setSpecialization(specialization);
         doctor.setPhoneNumber(phoneNumber);
         doctor.setEmail(email);
+        doctor.setPassword(password);
         doctor.setStartOfCareer(startOfCareer);
         doctor.setDateOfBirth(dateOfBirth);
         doctorRepository.save(doctor);

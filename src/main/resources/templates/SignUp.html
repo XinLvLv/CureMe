@@ -51,9 +51,16 @@
                     </div>
                     <div class="form-input-box">
                         <p class="input-label">
-                            Email*
+                            Email*(This is your username)
                         </p>
                         <input type="text" placeholder="Email" name="email" maxlength="50"
+                               required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                    </div>
+                    <div class="form-input-box">
+                        <p class="input-label">
+                            Password*
+                        </p>
+                        <input type="password" placeholder="Password" name="password" maxlength="20"
                                required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
                     </div>
                     <div class="form-input-box">
