@@ -15,4 +15,7 @@ public interface PatientsRepository extends CrudRepository<Patient,Integer>
 
     @Query(value = "select * from patient where patient_id = ?", nativeQuery = true)
     List<Patient> selectPatients(Integer patientId);
+
+    @Query(value = "select * from patient where doctor_id = ?", nativeQuery = true)
+    List<Patient> currentUserPatients(Integer doctorId);
 }

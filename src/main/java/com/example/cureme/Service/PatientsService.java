@@ -44,4 +44,8 @@ public class PatientsService {
         Patient patient=patientsRepository.selectPatients(patientId).get(0);
         patient.setSchedule(schedule);
     }
+
+    public List<Patient> currentUserPatients(Integer doctorId){
+        return patientsRepository.currentUserPatients(doctorId);
+    }
 }

@@ -45,7 +45,7 @@ public class Patient {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "doctor")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     //Getters and Setters

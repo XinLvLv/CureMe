@@ -1,9 +1,12 @@
 package com.example.cureme.Controller;
 
 import com.example.cureme.Entity.Doctor;
+import com.example.cureme.Entity.Patient;
 import com.example.cureme.Service.DoctorService;
+import com.example.cureme.Service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -22,8 +26,18 @@ import java.util.List;
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private PatientsService patientsService;
     @GetMapping(path = "/account")
-    private String account(){return "Account";}
+    private String account(Model model){
+        HttpSession session = getRequest().getSession();
+        Doctor currentUser = (Doctor) session.getAttribute("currentUser");
+        List<Patient> patients =  patientsService.currentUserPatients(currentUser.getDoctorId());
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("currentUserPatients", patients);
+        return "Account";
+    }
 
     @GetMapping(path = "/sign-up")
     private String signUp(){return "SignUp";}

@@ -440,6 +440,18 @@ table tr:nth-child(odd){
     padding-right: 5px;
 }
 
-.not-active-tag{
+.deactive-tag{
+    background: RGB(140,149,165);
+    color: RGB(255,255,255);
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.pending-tag{
     background: RGB(240,173,78);
+    color: RGB(255,255,255);
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Account</title>
@@ -182,22 +182,23 @@
                     <div class="col-md-9">
                         <div class="doctor-details">
                             <div class="doctor-details-name">
-                                <span>DR.AHL</span>
+                                <span th:text = "${currentUser.firstName + ' ' + currentUser.lastName}"></span>
                             </div>
                             <div class="doctor-details-degree">
-                                <span> Bachelor of Medicine, Bachelor of Surgery, or in Latin</span>
+                                <p th:text = "${'Intro: '+currentUser.briefIntroduction}"> </p>
+                                <p th:text = "${'Specialization: '+currentUser.specialization}"> </p>
                             </div>
                             <div class="doctor-details-email">
-                                <a href="mailto:ahil@gmail.com">
+                                <a href="${currentUser.email}">
                                     <span class="fa fa-envelope-o"></span>
-                                    <span>ahil@gmail.com</span>
+                                    <span th:text = "${currentUser.email}"></span>
                                 </a>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="doctor-details-phone">
                                         <span class="fa fa-phone"></span>
-                                        <span>0346560163</span>
+                                        <span th:text = "${currentUser.phoneNumber}"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -238,158 +239,49 @@
                                         <span>View</span>
                                     </th>
                                 </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
+                                <tr th:each="patient:${currentUserPatients}">
+                                    <td th:text = "${patient.firstName + ' ' + patient.lastName}">
+                                    <td th:text = "${patient.email}"></td>
                                     <td>
-                                        <span>
-                                            BIL852357
+                                        <span th:text = "${patient.patientId}"></span>
+                                        <span th:if = "${patient.status} eq 'Active'">
+                                            <div class="active-tag" th:text = "${patient.status}"></div>
                                         </span>
-                                        <span>
-                                            <div class="active-tag">Active</div>
+                                        <span th:if = "${patient.status} eq 'Pending'">
+                                            <div class="pending-tag" th:text = "${patient.status}"></div>
+                                        </span>
+                                        <span th:if = "${patient.status} eq 'Deactive'">
+                                            <div class="deactive-tag" th:text = "${patient.status}"></div>
                                         </span>
                                     </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
+<!--                                    <td>-->
+<!--                                        <a href="Readings.html">-->
+<!--                                            <button class="view-button">-->
+<!--                                                <span>View</span>-->
+<!--                                            </button>-->
+<!--                                        </a>-->
+<!--                                    </td>-->
                                 </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
-                                    <td>
-                                        <span>
-                                            BIL852357
-                                        </span>
-                                        <span>
-                                            <div class="active-tag">Active</div>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
-                                    <td>
-                                        <span>
-                                            BIL852357
-                                        </span>
-                                        <span>
-                                            <div class="active-tag">Active</div>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
-                                    <td>
-                                        <span>
-                                            BIL852357
-                                        </span>
-                                        <span>
-                                            <div class="active-tag not-active-tag">Not Active</div>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
-                                    <td>
-                                        <span>
-                                            BIL852357
-                                        </span>
-                                        <span>
-                                            <div class="active-tag not-active-tag">Not Active</div>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
-                                    <td>
-                                        <span>
-                                            BIL852357
-                                        </span>
-                                        <span>
-                                            <div class="active-tag not-active-tag">Not Active</div>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
-                                    <td>
-                                        <span>
-                                            BIL852357
-                                        </span>
-                                        <span>
-                                            <div class="active-tag not-active-tag">Not Active</div>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Bilal Asif</td>
-                                    <td>bilal@email.com</td>
-                                    <td>
-                                        <span>
-                                            BIL852357
-                                        </span>
-                                        <span>
-                                            <div class="active-tag not-active-tag">Not Active</div>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="Readings.html">
-                                            <button class="view-button">
-                                                <span>View</span>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
+
+<!--                                <tr>-->
+<!--                                    <td>Bilal Asif</td>-->
+<!--                                    <td>bilal@email.com</td>-->
+<!--                                    <td>-->
+<!--                                        <span>-->
+<!--                                            BIL852357-->
+<!--                                        </span>-->
+<!--                                        <span>-->
+<!--                                            <div class="active-tag not-active-tag">Not Active</div>-->
+<!--                                        </span>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <a href="Readings.html">-->
+<!--                                            <button class="view-button">-->
+<!--                                                <span>View</span>-->
+<!--                                            </button>-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                         </div>
