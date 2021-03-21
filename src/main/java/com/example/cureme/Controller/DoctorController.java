@@ -7,10 +7,7 @@ import com.example.cureme.Service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -32,9 +29,10 @@ public class DoctorController {
     @GetMapping(path = "/account")
     private String account(Model model){
         HttpSession session = getRequest().getSession();
-        Doctor currentUser = (Doctor) session.getAttribute("currentUser");
-        List<Patient> patients =  patientsService.currentUserPatients(currentUser.getDoctorId());
-        model.addAttribute("currentUser", currentUser);
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        Doctor doctor = doctorService.currentDoctor(currentUserId).get(0);
+        List<Patient> patients =  patientsService.currentUserPatients(currentUserId);
+        model.addAttribute("currentUser", doctor);
         model.addAttribute("currentUserPatients", patients);
         return "Account";
     }
@@ -69,7 +67,7 @@ public class DoctorController {
             //correct password
             if(doctors.get(0).getPassword().equals(password)){
                 HttpSession session = getRequest().getSession();
-                session.setAttribute("currentUser", doctors.get(0));
+                session.setAttribute("currentUserId", doctors.get(0).getDoctorId());
                 return "redirect:/home";
             }
             //invalid password
@@ -77,6 +75,15 @@ public class DoctorController {
                 return "redirect:/";
             }
         }
+    }
+
+    @PostMapping(path = "/doctor/editDoctor/{doctorId}")
+    private String editDoctorInformation(@PathVariable Integer doctorId, @RequestParam String firstName, String lastName,
+                                         String briefIntroduction, String specialization, String phoneNumber,
+                                         String email, Date startOfCareer, Date dateOfBirth ){
+        doctorService.editDoctorInformation(doctorId, firstName, lastName, briefIntroduction, specialization, phoneNumber,
+                email, startOfCareer, dateOfBirth);
+        return "redirect:/account";
     }
 
     private HttpServletRequest getRequest() {

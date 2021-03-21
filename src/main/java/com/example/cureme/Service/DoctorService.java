@@ -36,5 +36,22 @@ public class DoctorService {
         return doctorRepository.selectDoctorByEmail(email);
     }
 
+    public List<Doctor> currentDoctor(Integer doctorId){
+        return doctorRepository.selectDoctorById(doctorId);
+    }
 
+
+    public void editDoctorInformation(Integer doctorId, String firstName, String lastName, String briefIntroduction,
+                                      String specialization, String phoneNumber, String email, Date startOfCareer,
+                                      Date dateOfBirth) {
+        Doctor doctor = doctorRepository.selectDoctorById(doctorId).get(0);
+        doctor.setFirstName(firstName);
+        doctor.setLastName(lastName);
+        doctor.setBriefIntroduction(briefIntroduction);
+        doctor.setSpecialization(specialization);
+        doctor.setPhoneNumber(phoneNumber);
+        doctor.setEmail(email);
+        doctor.setStartOfCareer(startOfCareer);
+        doctor.setDateOfBirth(dateOfBirth);
+    }
 }
