@@ -77,13 +77,28 @@ public class DoctorController {
         }
     }
 
-    @PostMapping(path = "/doctor/editDoctor/{doctorId}")
+    @PostMapping(path = "/doctor/edit-doctor-information/{doctorId}")
     private String editDoctorInformation(@PathVariable Integer doctorId, @RequestParam String firstName, String lastName,
                                          String briefIntroduction, String specialization, String phoneNumber,
                                          String email, Date startOfCareer, Date dateOfBirth ){
         doctorService.editDoctorInformation(doctorId, firstName, lastName, briefIntroduction, specialization, phoneNumber,
                 email, startOfCareer, dateOfBirth);
         return "redirect:/account";
+    }
+
+    @PostMapping(path = "/doctor/change-password/{doctorId}")
+    private String changePassword(@PathVariable Integer doctorId, @RequestParam String oldPassword, String newPassword,
+                                  String confirmPassword){
+
+        List<Doctor> doctors = doctorService.currentDoctor(doctorId);
+        //change successfully
+        if (doctors.get(0).getPassword().equals(oldPassword) && newPassword.equals(confirmPassword)){
+            doctorService.changePassword(doctorId, newPassword);
+            return "redirect:/home";
+        }
+        //invalid old password
+        //the two new password are not the same
+        else return "redirect:/account";
     }
 
     private HttpServletRequest getRequest() {

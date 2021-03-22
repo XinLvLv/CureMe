@@ -122,24 +122,24 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="account-nav">
-                            <div class="account-nav-item account-nav-item-focus">
+                            <div class="account-nav-item account-nav-item-focus" id="personalInfoTab">
                                 <span class="fa fa-pencil account-nav-item-icon"></span>
                                 <span>Personal Info</span>
                             </div>
-                            <div class="account-nav-item">
-                                <span class="fa fa-image account-nav-item-icon"></span>
+                            <div class="account-nav-item" id="changeAvatarTab">
+                                <span class="fa fa-image account-nav-item-icon" ></span>
                                 <span>Change Avatar</span>
                             </div>
-                            <div class="account-nav-item">
+                            <div class="account-nav-item" id="changePasswordTab">
                                 <span class="fa fa-lock account-nav-item-icon"></span>
                                 <span>Change Password</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="account-content-personal-info">
+                        <div class="account-content-personal-info tab-item show" id="personalInfoContent">
                             <div class="account-content-personal-info-form">
-                                <form th:object = "${currentUser}" th:action = "@{'/doctor/editDoctor/'+${currentUser.doctorId}}" method="post">
+                                <form th:object = "${currentUser}" th:action = "@{'/doctor/edit-doctor-information/'+${currentUser.doctorId}}" method="post">
                                     <div class="form-input-box">
                                         <p class="input-label">First Name*</p>
                                         <input type="text" placeholder="First Name" name="firstName" maxlength="20"
@@ -200,6 +200,30 @@
                                         </div>
                                     </div>
                                     <input type="submit" value="Confirm Edit">
+                                    <input class="form-associate-button" type="button" value="Reset">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="account-content-change-avatar tab-item" id="changeAvatarContent"></div>
+                        <div class="account-content-change-password tab-item" id="changePasswordContent">
+                            <div class="account-content-change-password-form">
+                                <form th:object = "${currentUser}" th:action = "@{'/doctor/change-password/' + ${currentUser.doctorId}}" method="post">
+                                    <div class="form-input-box">
+                                        <p class="input-label">Old Password*</p>
+                                        <input type="password" placeholder="Old Password" name="oldPassword" maxlength="20"
+                                               required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                                    </div>
+                                    <div class="form-input-box">
+                                        <p class="input-label">New Password*</p>
+                                        <input type="password" placeholder="New Password" name="newPassword" maxlength="20"
+                                               required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                                    </div>
+                                    <div class="form-input-box">
+                                        <p class="input-label">Confirm Password*</p>
+                                        <input type="password" placeholder="Confirm Password" name="confirmPassword" maxlength="20"
+                                               required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                                    </div>
+                                    <input type="submit" value="Confirm">
                                     <input class="form-associate-button" type="button" value="Reset">
                                 </form>
                             </div>
@@ -304,7 +328,7 @@
        var accountTab = $("#accountTab");
        var overviewContent = $("#overviewContent");
        var accountContent = $("#accountContent");
-       //click tab2
+       //click overview
        overviewTab.click(function(){
            // 修改tab标签样式
            $(this).attr("class","account-header-item account-header-item-focus");
@@ -315,7 +339,7 @@
            accountContent.attr("class", "account-content-main tab-item");
        })
 
-       //click tab1
+       //click account
        accountTab.click(function(){
            // 修改tab标签样式
 
@@ -325,6 +349,43 @@
            overviewTab.siblings().attr("class","account-focus");
            accountContent.attr("class", "account-content-main tab-item show");
            overviewContent.attr("class", "account-content-main tab-item");
+       })
+
+       var personalInfoTab = $("#personalInfoTab");
+       var changeAvatarTab = $("#changeAvatarTab");
+       var changePasswordTab = $("#changePasswordTab");
+       var personalInfoContent = $("#personalInfoContent");
+       var changeAvatarContent = $("#changeAvatarContent");
+       var changePasswordContent = $("#changePasswordContent");
+
+       //click personal information
+       personalInfoTab.click(function(){
+           // 修改tab标签样式
+           $(this).attr("class","account-nav-item account-nav-item-focus");
+           $(this).siblings().attr("class","account-nav-item");
+           personalInfoContent.attr("class", "account-content-personal-info tab-item show");
+           changeAvatarContent.attr("class", "account-content-change-avatar tab-item");
+           changePasswordContent.attr("class", "account-content-change-password tab-item");
+       })
+
+       //click change avatar
+       changeAvatarTab.click(function(){
+           // 修改tab标签样式
+           $(this).attr("class","account-nav-item account-nav-item-focus");
+           $(this).siblings().attr("class","account-nav-item");
+           personalInfoContent.attr("class", "account-content-personal-info tab-item");
+           changeAvatarContent.attr("class", "account-content-change-avatar tab-item show");
+           changePasswordContent.attr("class", "account-content-change-password tab-item");
+       })
+
+       //click change password
+       changePasswordTab.click(function(){
+           // 修改tab标签样式
+           $(this).attr("class","account-nav-item account-nav-item-focus");
+           $(this).siblings().attr("class","account-nav-item");
+           personalInfoContent.attr("class", "account-content-personal-info tab-item");
+           changeAvatarContent.attr("class", "account-content-change-avatar tab-item");
+           changePasswordContent.attr("class", "account-content-change-password tab-item show");
        })
 
    </script>

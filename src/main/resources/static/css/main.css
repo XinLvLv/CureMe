@@ -121,7 +121,7 @@ input[type="submit"], input[type="button"]{
     margin-bottom: 10px;
 }
 
-.tab-item, .hide{
+.tab-item{
            display: none;
        }
 
@@ -323,7 +323,7 @@ table tr:nth-child(odd){
 }
 
 /*account personal info*/
-.account-content-personal-info{
+.account-content-personal-info, .account-content-change-avatar, .account-content-change-password{
   padding: 25px 30px 10px 0px;
 }
 

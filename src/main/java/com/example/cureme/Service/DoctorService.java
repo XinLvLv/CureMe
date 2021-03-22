@@ -54,4 +54,9 @@ public class DoctorService {
         doctor.setStartOfCareer(startOfCareer);
         doctor.setDateOfBirth(dateOfBirth);
     }
+
+    public void changePassword(Integer doctorId, String newPassword) {
+        Doctor doctor = doctorRepository.selectDoctorById(doctorId).get(0);
+        doctor.setPassword(newPassword);
+    }
 }
