@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface PatientsRepository extends CrudRepository<Patient,Integer>
 {
-    @Query(value = "select * from patient", nativeQuery = true)
-    List<Patient> listAll();
+    @Query(value = "select * from patient where doctor_id = ? and status = 'active'", nativeQuery = true)
+    List<Patient> listAll(Integer currentUserId);
 
     @Query(value = "select * from patient where patient_id = ?", nativeQuery = true)
     List<Patient> selectPatients(Integer patientId);

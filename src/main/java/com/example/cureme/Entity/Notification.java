@@ -23,10 +23,6 @@ public class Notification {
     @Column(name = "set_date")
     private Date setDate;
 
-    @ManyToOne
-    @JoinColumn(name = "patient")
-    private Patient patient;
-
     //getters and setters
     public Integer getId() {
         return id;
@@ -66,13 +62,5 @@ public class Notification {
 
     public void setSetDate(Date setDate) {
         this.setDate = setDate;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 }
