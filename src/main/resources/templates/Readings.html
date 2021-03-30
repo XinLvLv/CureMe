@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Readings</title>
@@ -13,6 +13,7 @@
     <script src="/static/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
+<!--header-->
 <div class="header">
     <div class="row">
         <div class="col-md-2">
@@ -46,7 +47,9 @@
         </div>
     </div>
 </div>
+<!--end of header-->
 <div class="row">
+<!--    left side navigation bar-->
     <div class="col-md-3">
         <nav>
             <div class="nav-list">
@@ -77,7 +80,7 @@
                     <span>Schedule</span>
                     </div>
                 </a>
-                <a href="/reading">
+                <a href="/reading/">
                     <div class="nav-item on-focus">
                     <span class="fa fa-line-chart nav-item-icon on-focus"></span>
                     <span>Readings</span>
@@ -107,14 +110,31 @@
             </div>
         </nav>
     </div>
+<!--    end of left side navigation bar-->
     <div class="col-md-9">
-        <div class="main-content">
+        <!--selectbox of patients-->
+        <div class="main-content select-box">
+            <select onchange="location.href = this.options[this.selectedIndex].value">
+                <option th:each="patient:${patients}" th:text="${patient.firstName + ' ' + patient.lastName}"
+                        th:value="${+patient.patientId}"></option>
+            </select>
+        </div>
+        <!--end of selectbox of patients-->
+        <!--empty box to remind the doctor of selecting a patient-->
+        <div class="main-content main-content-associate" th:unless = ${selectedPatient}>
+            <div>
+                <span>Please Select A Patient To View His Vital Signs</span>
+            </div>
+        </div>
+        <!--end of empty box-->
+<!--        information of a patient's reading-->
+        <div class="main-content" th:if = ${selectedPatient}>
             <div class="row">
                 <div class="col-md-3">
                     <div class="patient-avatar">
                         <img class="patient-avatar-image" src="/static/image/patient.jpg">
                         <div class="patient-avatar-title">
-                            <span>Bilal Asif</span>
+                            <span th:text="${selectedPatient.firstName + ' ' + selectedPatient.lastName}"></span>
                         </div>
                     </div>
                 </div>
@@ -131,7 +151,7 @@
                                     <span>Total</span>
                                 </div>
                                 <div class="reading-content total-reading-content">
-                                    <span>0</span>
+                                    <span></span>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +161,7 @@
                                     <span>Recommended Reading/Day</span>
                                 </div>
                                 <div class="reading-content recommended-reading-content">
-                                    <span>20</span>
+                                    <span th:text="${selectedPatient.schedule}"></span>
                                 </div>
                             </div>
                         </div>
@@ -150,9 +170,8 @@
                 </div>
             </div>
         </div>
-        <div id="blood-pressure"></div>
+<!--        end of information of a patient's reading-->
     </div>
-    <script src="../js/blood-pressure.js"></script>
 </div>
 </body>
 </html>
