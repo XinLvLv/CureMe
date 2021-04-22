@@ -26,6 +26,7 @@ public class DoctorController {
 
     @Autowired
     private PatientsService patientsService;
+
     @GetMapping(path = "/account")
     private String account(Model model){
         HttpSession session = getRequest().getSession();

@@ -20,20 +20,20 @@ public class VitalSigns {
 
     //vital signs of sepsis
     @Column(name = "temperature")
-    private Float temperature;
+    private Double temperature;
 
-    @Column(name = "pulse")
-    private Integer pulse;
+    @Column(name = "pulse_num")
+    private Integer pulseNum;
 
     @Column(name = "breathing_rate")
     private Integer breathingRate;
 
     //vital signs of apnea
-//    @Column(name = "pulse")
-//    private Integer pulse;
+//    @Column(name = "pulseNum")
+//    private Integer pulseNum;
 
     @Column(name = "spo2")
-    private Float spo2;
+    private Double spo2;
 
     //vital signs of hypotension
     @Column(name = "systolic_BP")
@@ -66,20 +66,20 @@ public class VitalSigns {
         this.patient = patient;
     }
 
-    public Float getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(Float temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 
     public Integer getPulse() {
-        return pulse;
+        return pulseNum;
     }
 
     public void setPulse(Integer pulse) {
-        this.pulse = pulse;
+        this.pulseNum = pulse;
     }
 
     public Integer getBreathingRate() {
@@ -90,11 +90,11 @@ public class VitalSigns {
         this.breathingRate = breathingRate;
     }
 
-    public Float getSpo2() {
+    public Double getSpo2() {
         return spo2;
     }
 
-    public void setSpo2(Float spo2) {
+    public void setSpo2(Double spo2) {
         this.spo2 = spo2;
     }
 

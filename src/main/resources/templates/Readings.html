@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="/static/css/main.css">
     <link rel="shortcut icon" href="/static/image/icon.png" type="image/x-icon">
     <script src="/static/js/echarts.min.js"></script>
-    <script src="/static/js/echarts-all.js"></script>
-    <script src="/static/js/echarts.common.min.js"></script>
     <script src="/static/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -171,7 +169,456 @@
             </div>
         </div>
 <!--        end of information of a patient's reading-->
+        <div class="main-content" id="pulse" style="width:100%; height:400px;" th:if = ${selectedPatient}></div>
+        <div class="main-content" id="temperature" style="width:100%; height:400px;" th:if = ${selectedPatient}></div>
+        <div class="main-content" id="breathing_rate" style="width:100%; height:400px;" th:if = ${selectedPatient}></div>
+<!--        <div class="main-content" id="sop2" style="width:100%; height:400px;" th:if = ${selectedPatient}></div>-->
+<!--        <div class="main-content" id="systolic_BP" style="width:100%; height:400px;" th:if = ${selectedPatient}></div>-->
+<!--        <div class="main-content" id="decreasing_MAP" style="width:100%; height:400px;" th:if = ${selectedPatient}></div>-->
     </div>
 </div>
+
+<script type="text/javascript" th:inline="javascript" th:if = ${selectedPatient}>
+    // 基于准备好的dom，初始化echarts实例
+    var pulseChart = echarts.init(document.getElementById('pulse'));
+    var temperatureChart = echarts.init(document.getElementById('temperature'));
+    var breathingRateChart = echarts.init(document.getElementById('breathing_rate'));
+    // var sop2Chart = echarts.init(document.getElementById('sop2'));
+    // var systolicBPChart = echarts.init(document.getElementById('systolicBP'));
+    // var decreasingMAPChart = echarts.init(document.getElementById('decreasing_MAP'));
+
+    // 新建productName与nums数组来接受数据，因为我们
+    var datetime = [];
+    var pulse = [];
+    var temperature = [];
+    var breathingRate = [];
+    var sop2 = [];
+    var decreasingMAP = [];
+    var systolicBP = [];
+
+    //
+    var specificUrl = "http://localhost:8080/reading/data/" + [[${selectedPatient.patientId}]];
+
+    //AJAX接收数据主体
+    $.ajax({
+        type:"GET",
+        url:specificUrl,
+        dataType:"json",
+        async:false,
+        success:function (result) {
+            for (var i = 0; i < result.length; i++){
+                datetime.push(result[i].datetime);
+                pulse.push(result[i].pulse);
+                temperature.push(result[i].temperature);
+                breathingRate.push(result[i].breathingRate);
+                sop2.push(result[i].sop2);
+                decreasingMAP.push(result[i].decreasingMAP);
+                systolicBP.push(result[i].systolicBP);
+            }
+        },
+        error :function(errorMsg) {
+            alert("failed！");
+        }
+    });
+
+    // 指定图表的配置项和数据
+    var pulseOption = {
+        title: {
+            text: 'Pulse',
+            left: '1%'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: {
+            left: '5%',
+            right: '15%',
+            bottom: '10%'
+        },
+        xAxis: {
+            data: datetime
+        },
+        yAxis: {},
+        toolbox: {
+            right: 10,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        dataZoom: [{
+            startValue: '2021-03-15T04:00:00.000+0000'
+        }, {
+            type: 'inside'
+        }],
+        visualMap: {
+            top: 50,
+            right: 10,
+            pieces: [{
+                gt: 0,
+                lt: 60,
+                color: '#FD0100'
+            }, {
+                gte: 60,
+                lte: 100,
+                color: '#93CE07'
+            }, {
+                gt: 100,
+                color: '#FD0100'
+            }],
+            outOfRange: {
+                color: '#999'
+            }
+        },
+        series: {
+            name: 'Pulse',
+            type: 'line',
+            data: pulse,
+            markLine: {
+                silent: true,
+                lineStyle: {
+                    color: '#333'
+                },
+                data: [{
+                    yAxis: 60
+                }, {
+                    yAxis: 100
+                }]
+            }
+        }
+    };
+    var temperatureOption = {
+        title: {
+            text: 'Temperature',
+            left: '1%'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: {
+            left: '5%',
+            right: '15%',
+            bottom: '10%'
+        },
+        xAxis: {
+            data: datetime
+        },
+        yAxis: {},
+        toolbox: {
+            right: 10,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        dataZoom: [{
+            startValue: '2021-03-15T04:00:00.000+0000'
+        }, {
+            type: 'inside'
+        }],
+        visualMap: {
+            top: 50,
+            right: 10,
+            pieces: [{
+                gt: 0,
+                lt: 36,
+                color: '#FD0100'
+            }, {
+                gte: 36,
+                lte: 38,
+                color: '#93CE07'
+            }, {
+                gt: 38,
+                color: '#FD0100'
+            }],
+            outOfRange: {
+                color: '#999'
+            }
+        },
+        series: {
+            name: 'Temperature',
+            type: 'line',
+            data: temperature,
+            markLine: {
+                silent: true,
+                lineStyle: {
+                    color: '#333'
+                },
+                data: [{
+                    yAxis: 60
+                }, {
+                    yAxis: 100
+                }]
+            }
+        }
+    };
+    var breathingRateOption = {
+        title: {
+            text: 'Breathing Rate',
+            left: '1%'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: {
+            left: '5%',
+            right: '15%',
+            bottom: '10%'
+        },
+        xAxis: {
+            data: datetime
+        },
+        yAxis: {},
+        toolbox: {
+            right: 10,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        dataZoom: [{
+            startValue: '2021-03-15T04:00:00.000+0000'
+        }, {
+            type: 'inside'
+        }],
+        visualMap: {
+            top: 50,
+            right: 10,
+            pieces: [{
+                gte: 0,
+                lte: 20,
+                color: '#93CE07'
+            }, {
+                gt: 20,
+                color: '#FD0100'
+            }],
+            outOfRange: {
+                color: '#999'
+            }
+        },
+        series: {
+            name: 'Breathing Rate',
+            type: 'line',
+            data: breathingRate,
+            markLine: {
+                silent: true,
+                lineStyle: {
+                    color: '#333'
+                },
+                data: [{
+                    yAxis: 60
+                }, {
+                    yAxis: 100
+                }]
+            }
+        }
+    };
+    // var sop2Option = {
+    //     title: {
+    //         text: 'SPO2',
+    //         left: '1%'
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis'
+    //     },
+    //     grid: {
+    //         left: '5%',
+    //         right: '15%',
+    //         bottom: '10%'
+    //     },
+    //     xAxis: {
+    //         data: datetime
+    //     },
+    //     yAxis: {},
+    //     toolbox: {
+    //         right: 10,
+    //         feature: {
+    //             dataZoom: {
+    //                 yAxisIndex: 'none'
+    //             },
+    //             restore: {},
+    //             saveAsImage: {}
+    //         }
+    //     },
+    //     dataZoom: [{
+    //         startValue: '2021-03-15T04:00:00.000+0000'
+    //     }, {
+    //         type: 'inside'
+    //     }],
+    //     visualMap: {
+    //         top: 50,
+    //         right: 10,
+    //         pieces: [{
+    //             gte: 90,
+    //             color: '#93CE07'
+    //         }, {
+    //             lt: 90,
+    //             color: '#FD0100'
+    //         }],
+    //         outOfRange: {
+    //             color: '#999'
+    //         }
+    //     },
+    //     series: {
+    //         name: 'SPO2',
+    //         type: 'line',
+    //         data: sop2,
+    //         markLine: {
+    //             silent: true,
+    //             lineStyle: {
+    //                 color: '#333'
+    //             },
+    //             data: [{
+    //                 yAxis: 60
+    //             }, {
+    //                 yAxis: 100
+    //             }]
+    //         }
+    //     }
+    // };
+    // var systolicBPption = {
+    //     title: {
+    //         text: 'Systolic BP',
+    //         left: '1%'
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis'
+    //     },
+    //     grid: {
+    //         left: '5%',
+    //         right: '15%',
+    //         bottom: '10%'
+    //     },
+    //     xAxis: {
+    //         data: datetime
+    //     },
+    //     yAxis: {},
+    //     toolbox: {
+    //         right: 10,
+    //         feature: {
+    //             dataZoom: {
+    //                 yAxisIndex: 'none'
+    //             },
+    //             restore: {},
+    //             saveAsImage: {}
+    //         }
+    //     },
+    //     dataZoom: [{
+    //         startValue: '2021-03-15T04:00:00.000+0000'
+    //     }, {
+    //         type: 'inside'
+    //     }],
+    //     visualMap: {
+    //         top: 50,
+    //         right: 10,
+    //         pieces: [{
+    //             lte: 20,
+    //             color: '#93CE07'
+    //         }, {
+    //             gt: 20,
+    //             color: '#FD0100'
+    //         }],
+    //         outOfRange: {
+    //             color: '#999'
+    //         }
+    //     },
+    //     series: {
+    //         name: 'Systolic BP',
+    //         type: 'line',
+    //         data: systolicBP,
+    //         markLine: {
+    //             silent: true,
+    //             lineStyle: {
+    //                 color: '#333'
+    //             },
+    //             data: [{
+    //                 yAxis: 60
+    //             }, {
+    //                 yAxis: 100
+    //             }]
+    //         }
+    //     }
+    // };
+    // var decreasingMAPOption = {
+    //     title: {
+    //         text: 'Decreasing MAP',
+    //         left: '1%'
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis'
+    //     },
+    //     grid: {
+    //         left: '5%',
+    //         right: '15%',
+    //         bottom: '10%'
+    //     },
+    //     xAxis: {
+    //         data: datetime
+    //     },
+    //     yAxis: {},
+    //     toolbox: {
+    //         right: 10,
+    //         feature: {
+    //             dataZoom: {
+    //                 yAxisIndex: 'none'
+    //             },
+    //             restore: {},
+    //             saveAsImage: {}
+    //         }
+    //     },
+    //     dataZoom: [{
+    //         startValue: '2021-03-15T04:00:00.000+0000'
+    //     }, {
+    //         type: 'inside'
+    //     }],
+    //     visualMap: {
+    //         top: 50,
+    //         right: 10,
+    //         pieces: [{
+    //             lte: 10,
+    //             color: '#93CE07'
+    //         }, {
+    //             gt: 10,
+    //             color: '#FD0100'
+    //         }],
+    //         outOfRange: {
+    //             color: '#999'
+    //         }
+    //     },
+    //     series: {
+    //         name: 'Decreasing MAP',
+    //         type: 'line',
+    //         data: decreasingMAP,
+    //         markLine: {
+    //             silent: true,
+    //             lineStyle: {
+    //                 color: '#333'
+    //             },
+    //             data: [{
+    //                 yAxis: 60
+    //             }, {
+    //                 yAxis: 100
+    //             }]
+    //         }
+    //     }
+    // };
+    // 使用刚指定的配置项和数据显示图表。
+    pulseChart.setOption(pulseOption);
+    temperatureChart.setOption(temperatureOption);
+    breathingRateChart.setOption(breathingRateOption);
+    // sop2Chart.setOption(sop2Option);
+    // systolicBPChart.setOption(systolicBPption);
+    // decreasingMAPChart.setOption(decreasingMAPOption);
+
+</script>
 </body>
 </html>
