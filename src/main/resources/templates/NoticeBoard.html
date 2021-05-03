@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Notice Board</title>
@@ -79,7 +79,7 @@
                     <span>Readings</span>
                     </div>
                 </a>
-                <a href="/add-notice">
+                <a href="/notification/add-notification">
                     <div class="nav-item">
                     <span class="fa fa-map-pin nav-item-icon"></span>
                     <span>Patient Notice</span>
@@ -88,7 +88,7 @@
                 <div class="nav-title">
                     <span>GENERAL</span>
                 </div>
-                <a href="/notice-board">
+                <a href="/notification/">
                     <div class="nav-item on-focus">
                     <span class="fa fa-pencil-square-o nav-item-icon on-focus"></span>
                     <span>Notice Board</span>
@@ -103,7 +103,85 @@
             </div>
         </nav>
     </div>
-    <div class="col-md-9"></div>
+    <div class="col-md-9">
+        <!--selectbox of patients-->
+        <div class="main-content select-box">
+            <select onchange="location.href = this.options[this.selectedIndex].value">
+                <option th:each="patient:${patients}" th:text="${patient.firstName + ' ' + patient.lastName}"
+                        th:value="${+patient.patientId}"></option>
+            </select>
+        </div>
+        <!--end of selectbox of patients-->
+        <!--empty box to remind the doctor of selecting a patient-->
+        <div class="main-content main-content-associate" th:unless = ${selectedPatient}>
+            <div>
+                <span>Please Select A Patient To View Notifications for him</span>
+            </div>
+        </div>
+        <!--end of empty box-->
+        <!--information of patient-->
+        <div class="main-content main-content-associate" th:if = ${selectedPatient}>
+            <div class="main-content-title main-content-title-associate">
+                <span class="fa fa-star"></span>
+                <span>BIO</span>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="BIO-content">
+                        <div class="BIO-content-text BIO-content-text-1">
+                            <div class="BIO-content-title">
+                                <span>REGISTRATION</span>
+                            </div>
+                            <div class="BIO-content-description">
+                                <span th:text=${selectedPatient.patientId}></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="BIO-content">
+                        <div class="BIO-content-text BIO-content-text-2">
+                            <div class="BIO-content-title">
+                                <span>NAME</span>
+                            </div>
+                            <div class="BIO-content-description">
+                                <span th:text="${selectedPatient.firstName + ' ' + selectedPatient.lastName}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="BIO-content">
+                        <div class="BIO-content-text BIO-content-text-3">
+                            <div class="BIO-content-title">
+                                <span>CURRENTLY</span>
+                            </div>
+                            <div class="BIO-content-description">
+                                <span th:text="${numbers+' '+'notifications'}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end of information of patient-->
+<!--        patient's notifications-->
+        <div class="main-content main-content-associate" th:each="notification:${notifications}">
+            <div class="main-content-title main-content-title-associate">
+                <span class="fa fa-sticky-note"></span>
+                <span th:text="${notification.title}"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="notice-content" th:text="${notification.detail}"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="set-date" th:text="${notification.date}">
+                </div>
+            </div>
+        </div>
+    </div>
+<!--        end of patient's notifications-->
 </div>
 </body>
 </html>

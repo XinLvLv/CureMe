@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import java.time.*;
 import java.util.Date;
+import java.util.List;
 
 @Transactional
 @Service
@@ -29,5 +30,9 @@ public class NotificationService {
         notification.setDate(now);
         notificationRepository.save(notification);
         return notification;
+    }
+
+    public List<Notification> selectByPatientId(Integer patient_id){
+        return  notificationRepository.selectByPatientId(patient_id);
     }
 }
