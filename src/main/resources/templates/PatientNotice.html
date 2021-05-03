@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Add Notice</title>
@@ -111,43 +111,30 @@
                     ADD NOTICE
                 </span>
             </div>
-            <div class="main-content-form">
-                <div class="form-input-box show">
-                    <label><input name="specific" type="radio" value="Specific">Specific</label>
-                    <select>
-                        <option>Bilal Asif</option>
-                        <option>Bilal Asif</option>
-                        <option>Bilal Asif</option>
-                        <option>Bilal Asif</option>
-                        <option>Bilal Asif</option>
-                        <option>Bilal Asif</option>
-                        <option>Bilal Asif</option>
-                </select>
+            <form action="/add-notification-submit-form" method = "post">
+                <div class="main-content-form">
+                    <div class="form-input-box">
+                        <select name = "patientId">
+                            <option th:each="patient:${patients}" th:text="${patient.firstName + ' ' + patient.lastName}"
+                                    th:value="${patient.patientId}"></option>
+                        </select>
+                    </div>
+                    <div class="form-input-box">
+                        <p class="input-label">
+                            Title*
+                        </p>
+                        <input type="text" placeholder="Title" name="title" maxlength="50">
+                    </div>
+                    <div class="form-input-box">
+                        <p class="input-label">
+                            Details*
+                        </p>
+                        <textarea rows="6" placeholder="Detail of the notification" name="detail" maxlength="140"></textarea>
+                    </div>
+                    <input type="submit" value="Submit">
+                    <input class="form-associate-button" type="button" value="Cancel">
                 </div>
-                <div class="form-input-box hide">
-                    <label><input name="general" type="radio" value="General">General</label>
-                </div>
-                <div class="form-input-box">
-                    <p class="input-label">
-                        Title*
-                    </p>
-                    <input type="text" placeholder="Title">
-                </div>
-                <div class="form-input-box">
-                    <p class="input-label">
-                        Details*
-                    </p>
-                    <textarea rows="10"></textarea>
-                </div>
-                <div class="form-input-box">
-                    <p class="input-label">
-                        Select Expiration date*
-                    </p>
-                    <input type="Date" placeholder="DD/MM/YY">
-                </div>
-                <input type="button" value="Submit">
-                <input class="form-associate-button" type="button"  value="Cancel">
-            </div>
+            </form>
         </div>
     </div>
 </div>

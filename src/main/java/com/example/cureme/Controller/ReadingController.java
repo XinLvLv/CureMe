@@ -57,26 +57,26 @@ public class ReadingController {
     }
 
     //add some data to the database
-    @GetMapping(path = "/db")
-    private String add() throws ParseException {
-        Patient patient = patientsService.selectPatient(10).get(0);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = dateFormat.parse("2021-03-01 00:00:00");
-        for(int i = 0; i < 100; i++){
-            VitalSigns vitalSigns= new VitalSigns();
-            date = new Date(date.getTime()+ 6*60*60*1000);
-            vitalSigns.setDatetime(date);
-            vitalSigns.setBreathingRate((Integer)10+ (int)(Math.random() * (31)));
-            vitalSigns.setPulse((Integer)40+ (int)(Math.random() * (81)));
-            vitalSigns.setTemperature((Double) Math.random() * (6.0) +35.0);
-            vitalSigns.setSpo2((Double)Math.random() * (20.0) +80.0);
-            vitalSigns.setDecreasingMAP((Integer)5+ (int)(Math.random() * (11)));
-            vitalSigns.setSystolicBP((Integer)10+ (int)(Math.random() * (21)));
-            vitalSigns.setPatient(patient);
-            readingRepository.save(vitalSigns);
-        }
-        return "Schedule";
-    }
+//    @GetMapping(path = "/db")
+//    private String add() throws ParseException {
+//        Patient patient = patientsService.selectPatient(10).get(0);
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = dateFormat.parse("2021-03-01 00:00:00");
+//        for(int i = 0; i < 100; i++){
+//            VitalSigns vitalSigns= new VitalSigns();
+//            date = new Date(date.getTime()+ 6*60*60*1000);
+//            vitalSigns.setDatetime(date);
+//            vitalSigns.setBreathingRate((Integer)10+ (int)(Math.random() * (31)));
+//            vitalSigns.setPulse((Integer)40+ (int)(Math.random() * (81)));
+//            vitalSigns.setTemperature((Double) Math.random() * (6.0) +35.0);
+//            vitalSigns.setSpo2((Double)Math.random() * (20.0) +80.0);
+//            vitalSigns.setDecreasingMAP((Integer)5+ (int)(Math.random() * (11)));
+//            vitalSigns.setSystolicBP((Integer)10+ (int)(Math.random() * (21)));
+//            vitalSigns.setPatient(patient);
+//            readingRepository.save(vitalSigns);
+//        }
+//        return "Schedule";
+//    }
 
     //get data from json
     @GetMapping(path = "/data/{patientId}")

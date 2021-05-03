@@ -17,11 +17,12 @@ public class Notification {
     @Column(name = "detail")
     private String Detail;
 
-    @Column(name = "expiration_date")
-    private Date expirationDate;
-
     @Column(name = "set_date")
-    private Date setDate;
+    private Date Date;
+
+    @OneToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     //getters and setters
     public Integer getId() {
@@ -48,19 +49,19 @@ public class Notification {
         Detail = detail;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public Date getDate() {
+        return Date;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setDate(Date setDate) {
+        this.Date = setDate;
     }
 
-    public Date getSetDate() {
-        return setDate;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setSetDate(Date setDate) {
-        this.setDate = setDate;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }
