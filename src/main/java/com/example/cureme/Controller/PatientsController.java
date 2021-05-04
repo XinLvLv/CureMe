@@ -1,4 +1,5 @@
 package com.example.cureme.Controller;
+import com.example.cureme.Entity.Doctor;
 import com.example.cureme.Entity.Patient;
 import com.example.cureme.Service.PatientsService;
 import com.example.cureme.Utility.SendMessageUtil;
@@ -24,6 +25,27 @@ import java.util.List;
 public class PatientsController {
     @Autowired
     private PatientsService patientsService;
+
+    @PostMapping(path = "/patient-login-submit-form")
+    public String logIn(@RequestParam String userName, String password){
+        List<Patient> patients = patientsService.selectPatientByUserName(userName);
+        //user doesn't exist
+        if(patients.size()==0){
+            return "redirect:/patient-login";
+        }
+        else {
+            //correct password
+            if(patients.get(0).getPassword().equals(password)){
+                HttpSession session = getRequest().getSession();
+                session.setAttribute("currentUserId", patients.get(0).getPatientId());
+                return "redirect:/home";
+            }
+            //invalid password
+            else {
+                return "redirect:/patient-login";
+            }
+        }
+    }
 
     @GetMapping(path = "/add-patient")
     private String addPatient(){return "AddPatient";}

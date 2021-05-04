@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>CareMe: Doctor Log in</title>
+    <title>CareMe: Patient Log in</title>
     <meta charset="utf-8">
     <meta name="keyword" content="CareMe">
     <meta http-equiv="description" content="Author: Xin Haoyan">
@@ -23,7 +23,7 @@
         <div class="login-form">
             <div class="login-form-main">
                 <p class="title">Sign In</p>
-                <form action="/login" method="post">
+                <form action="/patient-login-submit-form" method="post">
                     <div class="form-input-box">
                         <p class="input-label">Username*</p>
                         <input type="text" placeholder="Username" name="userName" maxlength="50"
@@ -35,17 +35,10 @@
                                required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <input class="form-confirm-button" type="submit" value="LOGIN">
-                        </div>
-<!--                        <div class="col-md-4">-->
-<!--                            <p class="form-link"><input type="checkbox" name="Remember" value="Remember">Remember</p>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4">-->
-<!--                            <p class="form-link">Admin Login</p>-->
+                        <div class="col-md-4"></div>
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
-                            <a href="/sign-up"><p class="form-link">New User?</p></a>
+                            <input class="form-confirm-button" type="submit" value="LOGIN">
                         </div>
                     </div>
                 </form>

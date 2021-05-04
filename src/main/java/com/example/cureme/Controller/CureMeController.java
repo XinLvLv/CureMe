@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class CureMeController {
-    @GetMapping(path="/")
-    private String login() { return "Login"; }
+    @GetMapping(path="/doctor-login")
+    private String doctorLogin() { return "DoctorLogin"; }
 
-    @GetMapping(path = "/home")
-    private String home() {return "Home"; }
+    @GetMapping(path="/patient-login")
+    private String patientLogin() { return "PatientLogin"; }
+
+    @GetMapping(path = "/doctor-home")
+    private String doctorHome() {return "DoctorHome"; }
+
+    @GetMapping(path = "/patient-home")
+    private String patientHome() {return "PatientHome";}
 }

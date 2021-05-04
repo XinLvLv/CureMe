@@ -54,4 +54,8 @@ public class PatientsService {
     public List<Patient> currentUserPatients(Integer doctorId){
         return patientsRepository.currentUserPatients(doctorId);
     }
+
+    public List<Patient> selectPatientByUserName(String userName) {
+        return patientsRepository.selectPatientByUserName(userName);
+    }
 }

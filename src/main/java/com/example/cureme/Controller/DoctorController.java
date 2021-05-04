@@ -57,7 +57,7 @@ public class DoctorController {
         }
     }
 
-    @PostMapping(path = "/login")
+    @PostMapping(path = "/doctor-login-submit-form")
     public String logIn(@RequestParam String userName, String password){
         List<Doctor> doctors = doctorService.currentDoctor(userName);
         //user doesn't exist
@@ -69,7 +69,7 @@ public class DoctorController {
             if(doctors.get(0).getPassword().equals(password)){
                 HttpSession session = getRequest().getSession();
                 session.setAttribute("currentUserId", doctors.get(0).getDoctorId());
-                return "redirect:/home";
+                return "redirect:/doctor-home";
             }
             //invalid password
             else {
