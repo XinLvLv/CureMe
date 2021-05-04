@@ -6,14 +6,12 @@ import com.example.cureme.Repository.PatientsRepository;
 import com.example.cureme.Repository.ReadingRepository;
 import com.example.cureme.Service.PatientsService;
 import com.example.cureme.Service.ReadingService;
+import org.hibernate.annotations.GeneratorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -84,6 +82,24 @@ public class ReadingController {
         return readingService.getPatientPulse(patientId);
     }
 
+    @GetMapping(path = "/submit-vital-signs")
+    private String submitVitalSigns(Model model) {
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        String diseases = patientsService.selectPatient(currentUserId).get(0).getDisease();
+        model.addAttribute("diseases", diseases);
+        return "SubmitVitalSigns";
+    }
+
+
+    @PostMapping(path = "/vital-signs-submit-form")
+    public String addNotificationSubmitForm(@RequestParam Integer breathing_rate, Integer systolic_BP, Integer pulse,
+                                            Integer spo2, Integer diastolic_BP, Integer eye, Integer verbal, Integer motor){
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        readingService.add(breathing_rate, systolic_BP, pulse,spo2, diastolic_BP, eye, verbal, motor, currentUserId);
+        return "redirect:/reading/submit-vital-signs";
+    }
 
     private HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

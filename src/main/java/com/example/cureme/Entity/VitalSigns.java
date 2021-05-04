@@ -1,5 +1,8 @@
 package com.example.cureme.Entity;
 
+import org.springframework.data.relational.core.sql.In;
+
+import javax.lang.model.element.Name;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,28 +22,28 @@ public class VitalSigns {
     private Patient patient;
 
     //vital signs of sepsis
-    @Column(name = "temperature")
-    private Double temperature;
-
-    @Column(name = "pulse_num")
-    private Integer pulseNum;
-
     @Column(name = "breathing_rate")
     private Integer breathingRate;
 
-    //vital signs of apnea
-//    @Column(name = "pulseNum")
-//    private Integer pulseNum;
+    @Column(name = "GCS_score")
+    private Integer GCS;
 
-    @Column(name = "spo2")
-    private Double spo2;
-
-    //vital signs of hypotension
     @Column(name = "systolic_BP")
     private Integer systolicBP;
 
-    @Column(name = "decreasing_MAP")
-    private Integer decreasingMAP;
+    //vital signs of apnea
+    @Column(name = "pulse")
+    private Integer pulse;
+
+    @Column(name = "spo2")
+    private Integer spo2;
+
+    //vital signs of hypotension
+//    @Column(name = "systolic_BP")
+//    private Integer systolicBP;
+
+    @Column(name = "diastolic_BP")
+    private Integer diastolicBP;
 
     public Integer getVitalSignId() {
         return vitalSignId;
@@ -66,22 +69,6 @@ public class VitalSigns {
         this.patient = patient;
     }
 
-    public Double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(Double temperature) {
-        this.temperature = temperature;
-    }
-
-    public Integer getPulse() {
-        return pulseNum;
-    }
-
-    public void setPulse(Integer pulse) {
-        this.pulseNum = pulse;
-    }
-
     public Integer getBreathingRate() {
         return breathingRate;
     }
@@ -90,12 +77,12 @@ public class VitalSigns {
         this.breathingRate = breathingRate;
     }
 
-    public Double getSpo2() {
-        return spo2;
+    public Integer getGCS() {
+        return GCS;
     }
 
-    public void setSpo2(Double spo2) {
-        this.spo2 = spo2;
+    public void setGCS(Integer GCS) {
+        this.GCS = GCS;
     }
 
     public Integer getSystolicBP() {
@@ -106,11 +93,27 @@ public class VitalSigns {
         this.systolicBP = systolicBP;
     }
 
-    public Integer getDecreasingMAP() {
-        return decreasingMAP;
+    public Integer getPulse() {
+        return pulse;
     }
 
-    public void setDecreasingMAP(Integer decreasingMAP) {
-        this.decreasingMAP = decreasingMAP;
+    public void setPulse(Integer pulse) {
+        this.pulse = pulse;
+    }
+
+    public Integer getSpo2() {
+        return spo2;
+    }
+
+    public void setSpo2(Integer spo2) {
+        this.spo2 = spo2;
+    }
+
+    public Integer getDiastolicBP() {
+        return diastolicBP;
+    }
+
+    public void setDiastolicBP(Integer diastolicBP) {
+        this.diastolicBP = diastolicBP;
     }
 }

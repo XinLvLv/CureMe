@@ -38,7 +38,7 @@ public class PatientsController {
             if(patients.get(0).getPassword().equals(password)){
                 HttpSession session = getRequest().getSession();
                 session.setAttribute("currentUserId", patients.get(0).getPatientId());
-                return "redirect:/home";
+                return "redirect:/patient-home";
             }
             //invalid password
             else {
@@ -66,7 +66,7 @@ public class PatientsController {
         Integer currentUserId = (Integer) session.getAttribute("currentUserId");
         patientsService.add(currentUserId, dateOfBirth, firstName, lastName, gender, address,
                 phoneNumber, email, disease);
-        return "redirect:/home";
+        return "redirect:/doctor-home";
     }
 
     private HttpServletRequest getRequest() {

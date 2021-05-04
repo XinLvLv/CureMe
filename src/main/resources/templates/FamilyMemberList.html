@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Home</title>
@@ -35,9 +35,9 @@
             </div>
         </div>
         <div class="col-md-1">
-                <div class="doctor-avatar">
+            <div class="doctor-avatar">
                 <img src="/static/image/patient.jpg" class="doctor-avatar-image">
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -48,8 +48,8 @@
             <div class="nav-list">
                 <a href="/patient-home">
                     <div class="nav-item on-focus">
-                    <span class="fa fa-home nav-item-icon on-focus"></span>
-                    <span>Home</span>
+                        <span class="fa fa-home nav-item-icon on-focus"></span>
+                        <span>Home</span>
                     </div>
                 </a>
                 <div class="nav-title">
@@ -57,45 +57,59 @@
                 </div>
                 <a href="/add-family-member">
                     <div class="nav-item">
-                    <span class="fa fa-user-o nav-item-icon"></span>
-                    <span>Add A Family Member</span>
+                        <span class="fa fa-user-o nav-item-icon"></span>
+                        <span>Add A Family Member</span>
                     </div>
                 </a>
                 <a href="/my-family-member">
                     <div class="nav-item">
-                    <span class="fa fa-list nav-item-icon"></span>
-                    <span>My Family Members</span>
+                        <span class="fa fa-list nav-item-icon"></span>
+                        <span>My Family Members</span>
                     </div>
                 </a>
                 <a href="/reading/submit-vital-signs">
                     <div class="nav-item">
-                    <span class="fa fa-calendar nav-item-icon"></span>
-                    <span>Submit My Vital Signs</span>
+                        <span class="fa fa-calendar nav-item-icon"></span>
+                        <span>Submit My Vital Signs</span>
                     </div>
                 </a>
-                <a href="/my-vital-signs">
+                <a href="/reading/my-vital-signs">
                     <div class="nav-item">
-                    <span class="fa fa-line-chart nav-item-icon"></span>
-                    <span>My Vital Signs</span>
+                        <span class="fa fa-line-chart nav-item-icon"></span>
+                        <span>My Vital Signs</span>
                     </div>
                 </a>
                 <a href="/notification/my-notification">
                     <div class="nav-item">
-                    <span class="fa fa-pencil-square-o nav-item-icon"></span>
-                    <span>Notice Board</span>
+                        <span class="fa fa-pencil-square-o nav-item-icon"></span>
+                        <span>Notice Board</span>
                     </div>
                 </a>
                 <a href="/">
                     <div class="nav-item">
-                    <span class="fa fa-sign-out nav-item-icon"></span>
-                    <span>Logout</span>
+                        <span class="fa fa-sign-out nav-item-icon"></span>
+                        <span>Logout</span>
                     </div>
                 </a>
             </div>
         </nav>
     </div>
     <div class="col-md-9">
-
+        <div class="main-content" th:each="familyMember:${familyMembers}">
+            <div class="main-content-title main-content-title-associate">
+                <span class="fa fa-sticky-note"></span>
+                <span th:text="${familyMember.relationship}"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="notice-content" th:text="${familyMember.firstName + ' ' + familyMember.lastName}"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="set-date" th:text="${familyMember.email}">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

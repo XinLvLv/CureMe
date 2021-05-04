@@ -64,6 +64,15 @@ public class NotificationController {
         return "NoticeBoard";
     }
 
+    @GetMapping(path = "/my-notification")
+    private String myNotification(Model model){
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Notification> notifications = notificationService.selectByPatientId(currentUserId);
+        model.addAttribute("notifications", notifications);
+        return "PatientNotification";
+    }
+
 
     private HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

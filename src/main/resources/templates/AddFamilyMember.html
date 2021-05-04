@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CareMe - Add A Family Member</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="shortcut icon" href="/static/image/icon.png" type="image/x-icon">
+</head>
+<body>
+
+<div class="header">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="logo">
+                <img src="/static/image/logo.png" class="logo-image">
+            </div>
+
+        </div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <span class="fa fa-bars"></span>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <span class="fa fa-search"></span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <p>Patient</p>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="doctor-avatar">
+                <img src="/static/image/patient.jpg" class="doctor-avatar-image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <nav>
+            <div class="nav-list">
+                <a href="/patient-home">
+                    <div class="nav-item on-focus">
+                        <span class="fa fa-home nav-item-icon on-focus"></span>
+                        <span>Home</span>
+                    </div>
+                </a>
+                <div class="nav-title">
+                    <span>FEATURES</span>
+                </div>
+                <a href="/add-family-member">
+                    <div class="nav-item">
+                        <span class="fa fa-user-o nav-item-icon"></span>
+                        <span>Add A Family Member</span>
+                    </div>
+                </a>
+                <a href="/my-family-member">
+                    <div class="nav-item">
+                        <span class="fa fa-list nav-item-icon"></span>
+                        <span>My Family Members</span>
+                    </div>
+                </a>
+                <a href="/reading/submit-vital-signs">
+                    <div class="nav-item">
+                        <span class="fa fa-calendar nav-item-icon"></span>
+                        <span>Submit My Vital Signs</span>
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="nav-item">
+                        <span class="fa fa-line-chart nav-item-icon"></span>
+                        <span>My Vital Signs</span>
+                    </div>
+                </a>
+                <a href="/notification/">
+                    <div class="nav-item">
+                        <span class="fa fa-pencil-square-o nav-item-icon"></span>
+                        <span>Notice Board</span>
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="nav-item">
+                        <span class="fa fa-sign-out nav-item-icon"></span>
+                        <span>Logout</span>
+                    </div>
+                </a>
+            </div>
+        </nav>
+    </div>
+    <div class="col-md-9">
+        <div class="main-content">
+            <div class="main-content-title">
+                <span class="fa fa-map-pin main-content-title-icon"></span>
+                <span class="main-content-title-context">
+                    ADD A FAMILY MEMBER
+                </span>
+            </div>
+            <form action="/add-family-member-submit-form" method = "post">
+                <div class="main-content-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    First Name*
+                                </p>
+                                <input type="text" placeholder="First Name" name="firstName" maxlength="20"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Last Name*
+                                </p>
+                                <input type="text" placeholder="Last Name" name="lastName" maxlength="20"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Relationship*
+                                </p>
+                                <input type="text" name="relationship" placeholder="Relationship"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Email*
+                                </p>
+                                <input type="text" name="email" placeholder="Email"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit">
+                    <input class="form-associate-button" type="button" value="Cancel">
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
