@@ -388,6 +388,7 @@ table tr:nth-child(odd){
 
 .total-reading-content{
     color: RGB(39,164,176);
+    font-size: 20px;
 }
 
 .recommended-reading-content{

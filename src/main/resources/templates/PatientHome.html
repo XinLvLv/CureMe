@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Home</title>
@@ -73,7 +73,7 @@
                     <span>Submit My Vital Signs</span>
                     </div>
                 </a>
-                <a href="/my-vital-signs">
+                <a href="/reading/my-vital-signs">
                     <div class="nav-item">
                     <span class="fa fa-line-chart nav-item-icon"></span>
                     <span>My Vital Signs</span>
@@ -95,7 +95,48 @@
         </nav>
     </div>
     <div class="col-md-9">
+        <div class="main-content" th:if = ${selectedPatient}>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="patient-avatar">
+                        <img class="patient-avatar-image" src="/static/image/patient.jpg">
+                        <div class="patient-avatar-title">
+                            <span th:text="${selectedPatient.firstName + ' ' + selectedPatient.lastName}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="patient-activity">
+                        <div class="main-content-title patient-activity-title">
+                            <span>Patient's Info</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="total-reading">
+                                <div class="reading-title">
+                                    <span>Diseases</span>
+                                </div>
+                                <div class="reading-content total-reading-content">
+                                    <span th:text="${selectedPatient.disease}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="recommended-reading">
+                                <div class="reading-title">
+                                    <span>Recommended Reading/Day</span>
+                                </div>
+                                <div class="reading-content recommended-reading-content">
+                                    <span th:text="${selectedPatient.schedule}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

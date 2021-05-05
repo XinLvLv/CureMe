@@ -66,10 +66,10 @@ public class ReadingController {
 //            vitalSigns.setDatetime(date);
 //            vitalSigns.setBreathingRate((Integer)10+ (int)(Math.random() * (31)));
 //            vitalSigns.setPulse((Integer)40+ (int)(Math.random() * (81)));
-//            vitalSigns.setTemperature((Double) Math.random() * (6.0) +35.0);
-//            vitalSigns.setSpo2((Double)Math.random() * (20.0) +80.0);
-//            vitalSigns.setDecreasingMAP((Integer)5+ (int)(Math.random() * (11)));
-//            vitalSigns.setSystolicBP((Integer)10+ (int)(Math.random() * (21)));
+//            vitalSigns.setDiastolicBP((Integer)30 + (int)(Math.random() * (40)));
+//            vitalSigns.setSystolicBP((Integer)60+ (int)(Math.random() * (60)));
+//            vitalSigns.setSpo2((Integer)70+ (int)(Math.random() * (25)));
+//            vitalSigns.setGCS((Integer)0+ (int)(Math.random() * (15)));
 //            vitalSigns.setPatient(patient);
 //            readingRepository.save(vitalSigns);
 //        }
@@ -99,6 +99,15 @@ public class ReadingController {
         Integer currentUserId = (Integer) session.getAttribute("currentUserId");
         readingService.add(breathing_rate, systolic_BP, pulse,spo2, diastolic_BP, eye, verbal, motor, currentUserId);
         return "redirect:/reading/submit-vital-signs";
+    }
+
+    @GetMapping(path = "/my-vital-signs")
+    private String myVitalSigns(Model model) {
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        Patient selectedPatient = patientsService.selectPatient(currentUserId).get(0);
+        model.addAttribute("selectedPatient", selectedPatient);
+        return "PatientVitalSigns";
     }
 
     private HttpServletRequest getRequest() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CareMe - Home</title>
@@ -92,7 +92,7 @@
                 </div>
                 <a href="/notification/">
                     <div class="nav-item">
-                    <span class="fa fa-pencil-smquare-o nav-item-icon"></span>
+                    <span class="fa fa-pencil-square-o nav-item-icon"></span>
                     <span>Notice Board</span>
                     </div>
                 </a>
@@ -106,6 +106,46 @@
         </nav>
     </div>
     <div class="col-md-9">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="doctor-overview-avatar">
+                        <img class="doctor-overview-avatar-image" src="/static/image/avatar.jpg">
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="doctor-details">
+                        <div class="doctor-details-name">
+                            <span th:text="${currentUser.firstName + ' ' + currentUser.lastName}"></span>
+                        </div>
+                        <div class="doctor-details-degree">
+                            <p th:text="${'Intro: '+currentUser.briefIntroduction}"></p>
+                            <p th:text="${'Specialization: '+currentUser.specialization}"></p>
+                        </div>
+                        <div class="doctor-details-email">
+                            <a href="${currentUser.email}">
+                                <span class="fa fa-envelope-o"></span>
+                                <span th:text="${currentUser.email}"></span>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="doctor-details-phone">
+                                    <span class="fa fa-phone"></span>
+                                    <span th:text="${currentUser.phoneNumber}"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="doctor-details-exp">
+                                    <span class="fa fa-flag-o"></span>
+                                    <span>6 years of experience</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>

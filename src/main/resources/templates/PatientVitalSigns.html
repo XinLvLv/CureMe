@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>CareMe - Readings</title>
+    <title>CareMe - Home</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/main.css">
@@ -11,7 +11,7 @@
     <script src="/static/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<!--header-->
+
 <div class="header">
     <div class="row">
         <div class="col-md-2">
@@ -33,67 +33,55 @@
         </div>
         <div class="col-md-1">
             <div class="header-font">
-                <p>Doctor</p>
+                <p>Patient</p>
             </div>
         </div>
         <div class="col-md-1">
-            <a href="/account">
                 <div class="doctor-avatar">
-                    <img src="/static/image/avatar.jpg" class="doctor-avatar-image">
+                <img src="/static/image/patient.jpg" class="doctor-avatar-image">
                 </div>
-            </a>
         </div>
     </div>
 </div>
-<!--end of header-->
+
 <div class="row">
-<!--    left side navigation bar-->
     <div class="col-md-3">
         <nav>
             <div class="nav-list">
-                <a href="/doctor-home">
-                    <div class="nav-item">
-                    <span class="fa fa-home nav-item-icon"></span>
+                <a href="/patient-home">
+                    <div class="nav-item on-focus">
+                    <span class="fa fa-home nav-item-icon on-focus"></span>
                     <span>Home</span>
                     </div>
                 </a>
                 <div class="nav-title">
                     <span>FEATURES</span>
                 </div>
-                <a href="/add-patient">
+                <a href="/add-family-member">
                     <div class="nav-item">
                     <span class="fa fa-user-o nav-item-icon"></span>
-                    <span>Add Patient</span>
+                    <span>Add A Family Member</span>
                     </div>
                 </a>
-                <a href="/patient-list">
+                <a href="/my-family-member">
                     <div class="nav-item">
                     <span class="fa fa-list nav-item-icon"></span>
-                    <span>Patient List</span>
+                    <span>My Family Members</span>
                     </div>
                 </a>
-                <a href="/schedule/">
+                <a href="/reading/submit-vital-signs">
                     <div class="nav-item">
                     <span class="fa fa-calendar nav-item-icon"></span>
-                    <span>Schedule</span>
+                    <span>Submit My Vital Signs</span>
                     </div>
                 </a>
-                <a href="/reading/">
-                    <div class="nav-item on-focus">
-                    <span class="fa fa-line-chart nav-item-icon on-focus"></span>
-                    <span>Readings</span>
-                    </div>
-                </a>
-                <a href="/notification/add-notification">
+                <a href="/reading/my-vital-signs">
                     <div class="nav-item">
-                    <span class="fa fa-map-pin nav-item-icon"></span>
-                    <span>Patient Notice</span>
-                </div>
+                    <span class="fa fa-line-chart nav-item-icon"></span>
+                    <span>My Vital Signs</span>
+                    </div>
                 </a>
-                <div class="nav-title">
-                    <span>GENERAL</span>
-                </div>
-                <a href="/notification/">
+                <a href="/notification/my-notification">
                     <div class="nav-item">
                     <span class="fa fa-pencil-square-o nav-item-icon"></span>
                     <span>Notice Board</span>
@@ -108,85 +96,21 @@
             </div>
         </nav>
     </div>
-<!--    end of left side navigation bar-->
     <div class="col-md-9">
-        <!--selectbox of patients-->
-        <div class="main-content select-box">
-            <select onchange="location.href = this.options[this.selectedIndex].value">
-                <option th:each="patient:${patients}" th:text="${patient.firstName + ' ' + patient.lastName}"
-                        th:value="${+patient.patientId}"></option>
-            </select>
+        <div class="main-content" id="breathing_rate" style="width:100%; height:400px;" th:if = "${selectedPatient}">
         </div>
-        <!--end of selectbox of patients-->
-        <!--empty box to remind the doctor of selecting a patient-->
-        <div class="main-content main-content-associate" th:unless = ${selectedPatient}>
-            <div>
-                <span>Please Select A Patient To View His Vital Signs</span>
-            </div>
+        <div class="main-content" id="gcs_score" style="width:100%; height:400px;" th:if = ${selectedPatient}>
         </div>
-        <!--end of empty box-->
-<!--        information of a patient's reading-->
-        <div class="main-content" th:if = ${selectedPatient}>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="patient-avatar">
-                        <img class="patient-avatar-image" src="/static/image/patient.jpg">
-                        <div class="patient-avatar-title">
-                            <span th:text="${selectedPatient.firstName + ' ' + selectedPatient.lastName}"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="patient-activity">
-                        <div class="main-content-title patient-activity-title">
-                            <span>Patient's Info</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="total-reading">
-                                <div class="reading-title">
-                                    <span>Diseases</span>
-                                </div>
-                                <div class="reading-content total-reading-content">
-                                    <span th:text="${selectedPatient.disease}"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="recommended-reading">
-                                <div class="reading-title">
-                                    <span>Recommended Reading/Day</span>
-                                </div>
-                                <div class="reading-content recommended-reading-content">
-                                    <span th:text="${selectedPatient.schedule}"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <div class="main-content" id="systolic_BP" style="width:100%; height:400px;" th:if = ${selectedPatient}>
         </div>
-<!--        end of information of a patient's reading-->
-        <div>
-            <div class="main-content" id="breathing_rate" style="width:100%; height:400px;" th:if = "${selectedPatient}">
-            </div>
-            <div class="main-content" id="gcs_score" style="width:100%; height:400px;" th:if = ${selectedPatient}>
-            </div>
-            <div class="main-content" id="systolic_BP" style="width:100%; height:400px;" th:if = ${selectedPatient}>
-            </div>
-            <div class="main-content" id="pulse" style="width:100%; height:400px;" th:if = ${selectedPatient}>
-            </div>
-            <div class="main-content" id="spo2" style="width:100%; height:400px;" th:if = ${selectedPatient}>
-            </div>
-            <div class="main-content" id="diastolic_BP" style="width:100%; height:400px;" th:if = ${selectedPatient}>
-            </div>
+        <div class="main-content" id="pulse" style="width:100%; height:400px;" th:if = ${selectedPatient}>
         </div>
-       </div>
+        <div class="main-content" id="spo2" style="width:100%; height:400px;" th:if = ${selectedPatient}>
+        </div>
+        <div class="main-content" id="diastolic_BP" style="width:100%; height:400px;" th:if = ${selectedPatient}>
+        </div>
+    </div>
 </div>
-
-<!--</script>-->
 <script type="text/javascript" th:inline="javascript" th:if = ${selectedPatient}>
     // 基于准备好的dom，初始化echarts实例
     var breathingRateChart = echarts.init(document.getElementById('breathing_rate'));
