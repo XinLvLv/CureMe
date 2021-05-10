@@ -98,12 +98,9 @@
         <div class="main-content" th:each="familyMember:${familyMembers}">
             <div class="main-content-title main-content-title-associate">
                 <span class="fa fa-sticky-note"></span>
-                <span th:text="${familyMember.relationship}"></span>
+                <span th:text="${familyMember.firstName + ' ' + familyMember.lastName}"></span>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="notice-content" th:text="${familyMember.firstName + ' ' + familyMember.lastName}"></div>
-                </div>
                 <div class="col-md-6">
                     <div class="set-date" th:text="${familyMember.email}">
                     </div>

@@ -2,6 +2,7 @@ package com.example.cureme.Controller;
 
 import com.example.cureme.Entity.Notification;
 import com.example.cureme.Entity.Patient;
+import com.example.cureme.Service.FamilyMemberService;
 import com.example.cureme.Service.NotificationService;
 import com.example.cureme.Service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class NotificationController {
 
     @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private FamilyMemberService familyMemberService;
 
     @GetMapping(path = "/add-notification")
     private String addNotice(Model model){
@@ -73,6 +77,29 @@ public class NotificationController {
         return "PatientNotification";
     }
 
+    @GetMapping(path = "/view-notification-by-fm")
+    private String viewNoticeByFM(Model model){
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Patient> patients = familyMemberService.viewPatients(currentUserId);
+        model.addAttribute("patients", patients);
+        return "NoticeBoardByFM";
+    }
+
+    @GetMapping(path = "/view-notification-by-fm/{patientId}")
+    private String patientNotificationByFM(Model model,@PathVariable Integer patientId){
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Patient> patients = familyMemberService.viewPatients(currentUserId);
+        model.addAttribute("patients", patients);
+        List<Notification> notifications = notificationService.selectByPatientId(patientId);
+        model.addAttribute("notifications", notifications);
+        List<Patient> selectedPatients= patientsService.selectPatient(patientId);
+        model.addAttribute("selectedPatient", selectedPatients.get(0));
+        int numberOfNotification = notifications.size();
+        model.addAttribute("numbers", numberOfNotification);
+        return "NoticeBoardByFM";
+    }
 
     private HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

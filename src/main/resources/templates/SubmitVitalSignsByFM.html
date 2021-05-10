@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>CareMe - Home</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="shortcut icon" href="/static/image/icon.png" type="image/x-icon">
+</head>
+<body>
+
+<div class="header">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="logo">
+                <img src="/static/image/logo.png" class="logo-image">
+            </div>
+
+        </div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <span class="fa fa-bars"></span>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <span class="fa fa-search"></span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="header-font">
+                <p>Family</p>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="doctor-avatar">
+                <img src="/static/image/family.png" class="doctor-avatar-image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <nav>
+            <div class="nav-list">
+                <a href="/family-member-home">
+                    <div class="nav-item on-focus">
+                        <span class="fa fa-home nav-item-icon on-focus"></span>
+                        <span>Home</span>
+                    </div>
+                </a>
+                <div class="nav-title">
+                    <span>FEATURES</span>
+                </div>
+                <a href="/reading/submit-vital-signs-by-fm">
+                    <div class="nav-item">
+                        <span class="fa fa-calendar nav-item-icon"></span>
+                        <span>Submit Vital Signs</span>
+                    </div>
+                </a>
+                <a href="/reading/view-vital-sign-by-fm">
+                    <div class="nav-item">
+                        <span class="fa fa-line-chart nav-item-icon"></span>
+                        <span>View Vital Signs</span>
+                    </div>
+                </a>
+                <a href="/notification/view-notification-by-fm">
+                    <div class="nav-item">
+                        <span class="fa fa-pencil-square-o nav-item-icon"></span>
+                        <span>Notice Board</span>
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="nav-item">
+                        <span class="fa fa-sign-out nav-item-icon"></span>
+                        <span>Logout</span>
+                    </div>
+                </a>
+            </div>
+        </nav>
+    </div>
+    <div class="col-md-9">
+        <!--selectbox of patients-->
+        <div class="main-content select-box">
+            <select onchange="location.href = this.options[this.selectedIndex].value">
+                <option th:each="patient:${patients}" th:text="${patient.firstName + ' ' + patient.lastName}"
+                        th:value="${'submit-vital-signs-by-fm/'+patient.patientId}"></option>
+            </select>
+        </div>
+        <!--end of selectbox of patients-->
+        <!--empty box to remind the doctor of selecting a patient-->
+        <div class="main-content main-content-associate" th:unless = ${selectedPatient}>
+            <div>
+                <span>Please Select A Patient To View Notifications for him</span>
+            </div>
+        </div>
+        <!--end of empty box-->
+        <!--information of patient-->
+        <div class="main-content" th:if = ${selectedPatient}>
+            <div class="main-content-title">
+                <span class="fa fa-map-pin main-content-title-icon"></span>
+                <span class="main-content-title-context">
+                    SUBMIT MY VITAL SIGNS
+                </span>
+            </div>
+            <form th:action="@{'/reading/vital-signs-submit-form/'+${selectedPatient.patientId}}" method = "post">
+                <div class="main-content-form">
+                    <div class="row">
+                        <div class="col-md-6" th:if="${#strings.contains(diseases,'Sepsis')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Breathing Rate*
+                                </p>
+                                <input type="text" placeholder="breaths/min" name="breathing_rate" maxlength="3"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:unless="${#strings.contains(diseases,'Sepsis')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Breathing Rate*
+                                </p>
+                                <input type="text" placeholder="You don't have to submit this item" name="breathing_rate" maxlength="3" readonly="readonly"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:if="${#strings.contains(diseases,'Sepsis')} or ${#strings.contains(diseases,'Hypotension')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Systolic Blood Pressure*
+                                </p>
+                                <input type="text" placeholder="mmHg" name="systolic_BP" maxlength="20"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:unless="${#strings.contains(diseases,'Sepsis')} and ${#strings.contains(diseases,'Hypotension')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Systolic Blood Pressure*
+                                </p>
+                                <input type="text" placeholder="You don't have to submit this item" name="systolic_BP" maxlength="20" readonly="readonly"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:if="${#strings.contains(diseases,'Sleep apnea')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Pulse*
+                                </p>
+                                <input type="text" name="pulse" placeholder="beats/min"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:unless="${#strings.contains(diseases,'Sleep apnea')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Pulse*
+                                </p>
+                                <input type="text" name="pulse" placeholder="You don't have to submit this item" readonly="readonly"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:if="${#strings.contains(diseases,'Sleep apnea')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    SpO2*
+                                </p>
+                                <input type="text" name="spo2" placeholder="%"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:unless="${#strings.contains(diseases,'Sleep apnea')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    SpO2*
+                                </p>
+                                <input type="text" name="spo2" placeholder="You don't have to submit this item" readonly="readonly"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" th:if="${#strings.contains(diseases,'Hypotension')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Diastolic Blood Pressure*
+                                </p>
+                                <input type="text" name="diastolic_BP" placeholder="mmHg"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+                        <div class="col-md-6" th:unless="${#strings.contains(diseases,'Hypotension')}">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Diastolic Blood Pressure*
+                                </p>
+                                <input type="text" name="diastolic_BP" placeholder="You don't have to submit this item" readonly="readonly"
+                                       required oninvalid="setCustomValidity('This field is required');" οninput="setCustomValidity('');">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" th:if="${#strings.contains(diseases,'Sepsis')}">
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Eye Opening*
+                                </p>
+                                <select name="eye">
+                                    <option value="0">Not testable</option>
+                                    <option value="1">No eye opening</option>
+                                    <option value="2">To pressure</option>
+                                    <option value="3">To sound</option>
+                                    <option value="4">Spontaneous</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Verbal Response*
+                                </p>
+                                <select name="verbal">
+                                    <option value="0">Not testable</option>
+                                    <option value="1">None</option>
+                                    <option value="2">Sounds</option>
+                                    <option value="3">Words</option>
+                                    <option value="4">Confused</option>
+                                    <option value="5">Orientated</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Motor Response*
+                                </p>
+                                <select name="motor">
+                                    <option value="0">Not testable</option>
+                                    <option value="1">None</option>
+                                    <option value="2">Extension</option>
+                                    <option value="3">Abnormal flexion</option>
+                                    <option value="4">Normal flexion</option>
+                                    <option value="5">Localising</option>
+                                    <option value="6">Obey commands</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" th:unless="${#strings.contains(diseases,'Sepsis')}">
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Eye Opening*
+                                </p>
+                                <select name="eye" οnfοcus="this.defaultIndex=this.selectedIndex;" οnchange="this.selectedIndex=this.defaultIndex;">
+                                    <option value="0">You don't have to submit this item</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Verbal Response*
+                                </p>
+                                <select name="verbal" οnfοcus="this.defaultIndex=this.selectedIndex;" οnchange="this.selectedIndex=this.defaultIndex;">
+                                    <option value="0">You don't have to submit this item</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-input-box">
+                                <p class="input-label">
+                                    Motor Response*
+                                </p>
+                                <select name="motor">
+                                    <option value="0">You don't have to submit this item</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Submit">
+                    <input class="form-associate-button" type="button" value="Cancel">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

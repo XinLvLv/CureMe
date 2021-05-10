@@ -1,9 +1,11 @@
 package com.example.cureme.Controller;
 
+import com.example.cureme.Entity.Notification;
 import com.example.cureme.Entity.Patient;
 import com.example.cureme.Entity.VitalSigns;
 import com.example.cureme.Repository.PatientsRepository;
 import com.example.cureme.Repository.ReadingRepository;
+import com.example.cureme.Service.FamilyMemberService;
 import com.example.cureme.Service.PatientsService;
 import com.example.cureme.Service.ReadingService;
 import org.hibernate.annotations.GeneratorType;
@@ -31,10 +33,12 @@ public class ReadingController {
     @Autowired
     private ReadingService readingService;
     @Autowired
+    private FamilyMemberService familyMemberService;
+    @Autowired
     private ReadingRepository readingRepository;
 
     @GetMapping(path="/")
-    private String schedule(Model model){
+    private String reading(Model model){
         HttpSession session = getRequest().getSession();
         Integer currentUserId = (Integer) session.getAttribute("currentUserId");
         List<Patient> patients = patientsService.patientList(currentUserId);
@@ -108,6 +112,57 @@ public class ReadingController {
         Patient selectedPatient = patientsService.selectPatient(currentUserId).get(0);
         model.addAttribute("selectedPatient", selectedPatient);
         return "PatientVitalSigns";
+    }
+
+    @GetMapping(path = "/submit-vital-signs-by-fm")
+    private String submitVitalSignsByFM(Model model) {
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Patient> patients = familyMemberService.viewPatients(currentUserId);
+        model.addAttribute("patients", patients);
+        return "SubmitVitalSignsByFM";
+    }
+
+    @GetMapping(path = "/submit-vital-signs-by-fm/{patientId}")
+    private String submitVitalSignsOfPatientByFM(Model model, @PathVariable Integer patientId) {
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Patient> patients = familyMemberService.viewPatients(currentUserId);
+        model.addAttribute("patients", patients);
+        String diseases = patientsService.selectPatient(patientId).get(0).getDisease();
+        model.addAttribute("diseases", diseases);
+        List<Patient> selectedPatients= patientsService.selectPatient(patientId);
+        model.addAttribute("selectedPatient", selectedPatients.get(0));
+        return "SubmitVitalSignsByFM";
+    }
+
+    @PostMapping(path = "/vital-signs-submit-form/{patient_id}")
+    private String addVitalSignsSubmitFormById(@RequestParam Integer breathing_rate, Integer systolic_BP, Integer pulse,
+                                                 Integer spo2, Integer diastolic_BP, Integer eye, Integer verbal, Integer motor,
+                                                 @PathVariable Integer patient_id){
+        readingService.add(breathing_rate, systolic_BP, pulse,spo2, diastolic_BP, eye, verbal, motor, patient_id);
+        return "redirect:/reading/submit-vital-signs-by-fm";
+    }
+
+    @GetMapping(path="/view-vital-sign-by-fm")
+    private String viewReadingByFM(Model model){
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Patient> patients = familyMemberService.viewPatients(currentUserId);
+        model.addAttribute("patients", patients);
+        return "ViewVitalSignsByFM";
+    }
+
+    @GetMapping(path = "/view-vital-sign-by-fm/{patientId}")
+    private String patientReadingByFM(Model model,@PathVariable Integer patientId){
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Patient> patients = familyMemberService.viewPatients(currentUserId);
+        model.addAttribute("patients", patients);
+        List<Patient> selectedPatients= patientsService.selectPatient(patientId);
+        model.addAttribute("selectedPatient", selectedPatients.get(0));
+        model.addAttribute("selectedPatientId", selectedPatients.get(0).getPatientId());
+        return "ViewVitalSignsByFM";
     }
 
     private HttpServletRequest getRequest() {

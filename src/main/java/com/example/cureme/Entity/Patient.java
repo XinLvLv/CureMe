@@ -1,7 +1,11 @@
 package com.example.cureme.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "patient")
@@ -47,6 +51,13 @@ public class Patient {
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
+
+    @JsonIgnoreProperties(value = { "patients" })
+    @ManyToMany(targetEntity = FamilyMember.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "sys_patient_family_member",
+            joinColumns = {@JoinColumn(name = "sys_patient_id", referencedColumnName = "patient_id")},
+            inverseJoinColumns = {@JoinColumn(name = "sys_family_member_id", referencedColumnName = "family_member_id")})
+    private Set<FamilyMember> familyMembers = new HashSet<>();
 
     //Getters and Setters
     public Integer getPatientId() {
@@ -160,5 +171,13 @@ public class Patient {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public Set<FamilyMember> getFamilyMembers() {
+        return familyMembers;
+    }
+
+    public void setFamilyMembers(Set<FamilyMember> familyMembers) {
+        this.familyMembers = familyMembers;
     }
 }

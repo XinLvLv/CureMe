@@ -57,6 +57,17 @@ public class DoctorController {
         }
     }
 
+    @GetMapping(path="/doctor-login")
+    private String doctorLogin() { return "DoctorLogin"; }
+
+    @GetMapping(path = "/doctor-home")
+    private String doctorHome(Model model) {
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        Doctor doctor = doctorService.currentDoctor(currentUserId).get(0);
+        model.addAttribute("currentUser", doctor);
+        return "DoctorHome"; }
+
     @PostMapping(path = "/doctor-login-submit-form")
     public String logIn(@RequestParam String userName, String password){
         List<Doctor> doctors = doctorService.currentDoctor(userName);

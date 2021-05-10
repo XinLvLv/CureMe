@@ -26,6 +26,9 @@ public class PatientsController {
     @Autowired
     private PatientsService patientsService;
 
+    @GetMapping(path="/patient-login")
+    private String patientLogin() { return "PatientLogin"; }
+
     @PostMapping(path = "/patient-login-submit-form")
     public String logIn(@RequestParam String userName, String password){
         List<Patient> patients = patientsService.selectPatientByUserName(userName);
@@ -68,6 +71,14 @@ public class PatientsController {
                 phoneNumber, email, disease);
         return "redirect:/doctor-home";
     }
+
+    @GetMapping(path = "/patient-home")
+    private String patientHome(Model model) {
+        HttpSession session = getRequest().getSession();
+        Integer currentUserId = (Integer) session.getAttribute("currentUserId");
+        List<Patient> selectedPatients= patientsService.selectPatient(currentUserId);
+        model.addAttribute("selectedPatient", selectedPatients.get(0));
+        return "PatientHome";}
 
     private HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

@@ -1,6 +1,8 @@
 package com.example.cureme.Entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "family_member")
@@ -16,18 +18,18 @@ public class FamilyMember {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "relationship")
-    private String relationship;
-
     @Column(name = "email")
     private String email;
 
     @Column(name = "password")
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
+    @ManyToMany(targetEntity = Patient.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "sys_patient_family_member",
+    joinColumns = {@JoinColumn(name = "sys_family_member_id", referencedColumnName = "family_member_id")},
+    inverseJoinColumns = {@JoinColumn(name = "sys_patient_id", referencedColumnName = "patient_id")})
+    private Set<Patient> patients = new HashSet<>();
+
 
     public Integer getFamilyMemberId() {
         return familyMemberId;
@@ -51,14 +53,6 @@ public class FamilyMember {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
     }
 
     public String getEmail() {
@@ -89,11 +83,11 @@ public class FamilyMember {
         password = pwd;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Set<Patient> getPatients() {
+        return patients;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatients(Set<Patient> patients) {
+        this.patients = patients;
     }
 }
