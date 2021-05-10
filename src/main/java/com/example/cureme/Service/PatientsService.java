@@ -19,7 +19,8 @@ public class PatientsService {
     private PatientsRepository patientsRepository;
     @Autowired
     private DoctorService doctorService;
-
+    @Autowired
+    private MailService mailService;
     public Patient add ( Integer currentUserId, Date dateOfBirth, String firstName, String lastName, String gender, String address,
                          String phoneNumber, String email, String disease){
         Patient patient = new Patient();
@@ -37,6 +38,14 @@ public class PatientsService {
         patient.setSchedule(3);
         patient.setDoctor(doctor);
         patientsRepository.save(patient);
+        String title = "Welcome to CareMe";
+        String detail = "Use your username and password to sign in.\n";
+        detail += "username : ";
+        detail += email;
+        detail += "\npassword : ";
+        detail += patient.getPassword();
+        detail += "\nPlease log in through : http://localhost:8080/patient-login";
+        mailService.sendSimpleMail(email, title, detail);
         return patient;
     }
 
@@ -57,5 +66,10 @@ public class PatientsService {
 
     public List<Patient> selectPatientByUserName(String userName) {
         return patientsRepository.selectPatientByUserName(userName);
+    }
+
+    public void changeStatus(String userName) {
+        Patient patient=patientsRepository.selectPatientByUserName(userName).get(0);
+        patient.setStatus("Active");
     }
 }

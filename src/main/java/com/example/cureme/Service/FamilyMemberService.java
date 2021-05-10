@@ -20,6 +20,8 @@ public class FamilyMemberService {
     private PatientsService patientsService;
     @Autowired
     private FamilyMemberRepository familyMemberRepository;
+    @Autowired
+    private MailService mailService;
 
     public FamilyMember add(Integer patient_id, String firstName, String lastName, String email){
         FamilyMember familyMember = new FamilyMember();
@@ -30,6 +32,14 @@ public class FamilyMemberService {
         Patient patient = patientsService.selectPatient(patient_id).get(0);
         familyMember.getPatients().add(patient);
         familyMemberRepository.save(familyMember);
+        String title = "Welcome to CareMe";
+        String detail = "Use your username and password to sign in.\n";
+        detail += "username : ";
+        detail += email;
+        detail += "\npassword : ";
+        detail += patient.getPassword();
+        detail += "\nPlease log in through : http://localhost:8080/family-member-login";
+        mailService.sendSimpleMail(email, title, detail);
         return familyMember;
     }
 

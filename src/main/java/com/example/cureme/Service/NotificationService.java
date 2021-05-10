@@ -19,6 +19,8 @@ public class NotificationService {
     NotificationRepository notificationRepository;
     @Autowired
     PatientsService patientsService;
+    @Autowired
+    MailService mailService;
 
     public Notification add (Integer patientId, String title, String detail){
         Notification notification = new Notification();
@@ -28,6 +30,7 @@ public class NotificationService {
         notification.setPatient(patient);
         Date now = new Date();
         notification.setDate(now);
+        mailService.sendSimpleMail(patient.getEmail(), title, detail);
         notificationRepository.save(notification);
         return notification;
     }

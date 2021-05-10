@@ -1,11 +1,8 @@
 package com.example.cureme.Controller;
-import com.example.cureme.Entity.Doctor;
 import com.example.cureme.Entity.Patient;
 import com.example.cureme.Service.PatientsService;
-import com.example.cureme.Utility.SendMessageUtil;
-import org.bouncycastle.math.raw.Mod;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +11,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +36,8 @@ public class PatientsController {
             if(patients.get(0).getPassword().equals(password)){
                 HttpSession session = getRequest().getSession();
                 session.setAttribute("currentUserId", patients.get(0).getPatientId());
+                if(!patients.get(0).getStatus().equals("Active"))
+                    patientsService.changeStatus(userName);
                 return "redirect:/patient-home";
             }
             //invalid password
